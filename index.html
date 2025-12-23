@@ -492,6 +492,23 @@
         .footer-links a {
             color: white;
         }
+        .hf-logo {
+            width: 2.5rem;
+            height: 2.5rem;
+            fill: var(--secondary-color);
+        }
+
+        .hf-logo:hover {
+            fill: var(--primary-color);
+        }
+
+        /* For the link card */
+        .hf-logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-md);
+        }   
         
         /* Responsive Design */
         @media (max-width: 992px) {
@@ -755,12 +772,16 @@
                 </a>
                 
                 <a href="https://huggingface.co/DJLougen" class="link-card" target="_blank">
-                    <div class="link-icon">
-                        <i class="fas fa-robot"></i>
+                    <div class="hf-logo-container">
+                        <svg class="hf-logo" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 22.5C6.201 22.5 1.5 17.799 1.5 12S6.201 1.5 12 1.5 22.5 6.201 22.5 12 17.799 22.5 12 22.5z"/>
+                            <path d="M12 6c-3.309 0-6 2.691-6 6s2.691 6 6 6 6-2.691 6-6-2.691-6-6-6zm0 10.5c-2.484 0-4.5-2.016-4.5-4.5S9.516 7.5 12 7.5s4.5 2.016 4.5 4.5-2.016 4.5-4.5 4.5z"/>
+                            <path d="M12 9c-1.657 0-3 1.343-3 3s1.343 3 3 3 3-1.343 3-3-1.343-3-3-3z"/>
+                        </svg>
                     </div>
                     <div class="link-text">Hugging Face</div>
                 </a>
-                
+                                
                 <!-- LinkedIn Card -->
                 <a href="https://linkedin.com/in/djlougen" class="link-card linkedin-card" target="_blank">
                     <div class="link-icon">
