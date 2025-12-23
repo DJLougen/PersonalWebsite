@@ -20,6 +20,7 @@
             --primary-color: #2d5016; /* Deep forest green */
             --secondary-color: #5a8c5a; /* Muted sage green */
             --accent-color: #c9a86a; /* Earthy gold */
+            --linkedin-color: #0077b5; /* LinkedIn brand color */
             --light-color: #f8f7f3; /* Warm off-white */
             --dark-color: #3a3a3a; /* Soft dark gray */
             --gray-color: #e8e6df; /* Warm light gray */
@@ -121,6 +122,18 @@
         
         .btn-outline:hover {
             background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        .btn-linkedin {
+            background-color: var(--linkedin-color);
+            color: white;
+            border: 2px solid var(--linkedin-color);
+        }
+        
+        .btn-linkedin:hover {
+            background-color: #006097;
+            border-color: #006097;
             color: white;
         }
         
@@ -436,6 +449,18 @@
             box-shadow: 0 10px 25px rgba(45, 80, 22, 0.12);
         }
         
+        .link-card.linkedin-card {
+            border-top: 4px solid var(--linkedin-color);
+        }
+        
+        .link-card.linkedin-card .link-icon {
+            color: var(--linkedin-color);
+        }
+        
+        .link-card.linkedin-card:hover {
+            box-shadow: 0 10px 25px rgba(0, 119, 181, 0.15);
+        }
+        
         .link-icon {
             font-size: 2.5rem;
             margin-bottom: var(--spacing-md);
@@ -587,7 +612,7 @@
             <h2>About Me</h2>
             <p>I am a second-year PhD student in the Department of Psychology at the University of Toronto, working under the supervision of Dr. Jay Pratt. My research focuses on understanding the distinct contributions of magnocellular, parvocellular, and koniocellular pathways in visual processing, with particular emphasis on inhibition of return phenomena.</p>
             <p>I employ psychophysical methods to investigate how these parallel visual pathways contribute to different aspects of visual perception and attention. My work bridges cognitive neuroscience and computational modeling to develop biologically-plausible explanations for visual behavior.</p>
-            <p>In parallel with my experimental work, I develop efficient, parameter-sparse computer vision models inspired by the organizational principles of the early  system. These models aim to achieve frontier effiency performance with increased interpretability compared to traditional deep learning approaches.</p>
+            <p>In parallel with my experimental work, I develop efficient, parameter-sparse computer vision models inspired by the organizational principles of the early visual system. These models aim to achieve frontier efficiency performance with increased interpretability compared to traditional deep learning approaches.</p>
         </div>
     </section>
 
@@ -621,7 +646,7 @@
         </div>
     </section>
 
-<!-- Poster Section -->
+    <!-- Poster Section -->
     <section id="posters" class="poster">
         <div class="container">
             <h2>Selected Conference Posters</h2>
@@ -649,7 +674,6 @@
             </ul>
         </div>
     </section>
-
 
     <!-- Publications Section -->
     <section id="publications" class="publications">
@@ -699,8 +723,6 @@
                         <p><small>This may take a moment on first load</small></p>
                     </div>
                     
-                    <!-- Embed your Hugging Face Space here -->
-                    <!-- Replace the src with your actual Hugging Face Space URL -->
                     <iframe 
                         class="hf-iframe" 
                         src="https://huggingface.co/spaces/keras-io/vision-transformers?embed=true" 
@@ -709,20 +731,6 @@
                         allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; clipboard-write; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
                         sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
                     ></iframe>
-                    
-                    <!-- Alternative: If your model isn't on HF yet, use this placeholder -->
-                    <!-- <div class="demo-placeholder" id="demoPlaceholder">
-                        <i class="fas fa-robot"></i>
-                        <h3>Embed Your Hugging Face Space</h3>
-                        <p>To embed your model demo:</p>
-                        <ol style="text-align: left; max-width: 500px; margin: 1rem auto;">
-                            <li>Upload your model to Hugging Face Spaces</li>
-                            <li>Click "Embed this Space" on your Space page</li>
-                            <li>Copy the iframe code</li>
-                            <li>Replace the iframe src above with your URL</li>
-                        </ol>
-                        <button class="btn" onclick="loadExampleDemo()">Load Example Demo</button>
-                    </div> -->
                 </div>
                 
                 <div style="padding: var(--spacing-md); background-color: white; border-top: 1px solid var(--gray-color);">
@@ -772,6 +780,26 @@
                     </div>
                     <div class="link-text">Hugging Face</div>
                 </a>
+                
+                <!-- LinkedIn Card -->
+                <a href="https://linkedin.com/in/djlougen" class="link-card linkedin-card" target="_blank">
+                    <div class="link-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <div class="link-text">LinkedIn</div>
+                </a>
+            </div>
+            
+            <!-- LinkedIn Connect Button Section -->
+            <div style="margin-top: var(--spacing-xl); text-align: center;">
+                <h3>Connect with me on LinkedIn</h3>
+                <p style="max-width: 600px; margin: var(--spacing-md) auto;">
+                    Let's connect on LinkedIn to discuss visual neuroscience, parameter-sparse models, 
+                    or potential collaborations.
+                </p>
+                <a href="https://linkedin.com/in/djlougen" class="btn btn-linkedin" target="_blank" style="margin-top: var(--spacing-md);">
+                    <i class="fab fa-linkedin" style="margin-right: 8px;"></i>Connect on LinkedIn
+                </a>
             </div>
         </div>
     </section>
@@ -781,15 +809,35 @@
         <div class="container">
             <div class="footer-content">
                 <div class="copyright">
-                    &copy; 2023 Visual Neuroscience Researcher
+                    &copy; 2024 Visual Neuroscience Researcher
                 </div>
                 <div class="affiliation">
                     Department of Psychology, University of Toronto
                 </div>
                 <ul class="footer-links">
                     <li><a href="mailto:your.email@utoronto.ca">Email</a></li>
-                    <li><a href="#privacy">Privacy Policy</a></li>
+                    <li><a href="https://linkedin.com/in/djlougen" target="_blank">LinkedIn</a></li>
+                    <li><a href="#privacy">Privacy</a></li>
                 </ul>
+            </div>
+            
+            <!-- Social Media Links -->
+            <div style="margin-top: var(--spacing-md); text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: var(--spacing-md);">
+                <p style="margin-bottom: var(--spacing-sm); font-size: 0.9rem;">Connect with me:</p>
+                <div style="display: flex; justify-content: center; gap: var(--spacing-lg);">
+                    <a href="https://github.com/DJLougen" target="_blank" style="color: white; font-size: 1.5rem;">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/djlougen/" target="_blank" style="color: white; font-size: 1.5rem;">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://scholar.google.com/citations?user=r8Vs4lwAAAAJ&hl=en" target="_blank" style="color: white; font-size: 1.5rem;">
+                        <i class="fas fa-graduation-cap"></i>
+                    </a>
+                    <a href="https://huggingface.co/DJLougen" target="_blank" style="color: white; font-size: 1.5rem;">
+                        <i class="fas fa-robot"></i>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
@@ -848,32 +896,6 @@
         iframe.addEventListener('load', () => {
             loadingSpinner.classList.add('hidden');
         });
-        
-        // If using placeholder, this function would load an example
-        function loadExampleDemo() {
-            const placeholder = document.getElementById('demoPlaceholder');
-            const iframeContainer = document.querySelector('.hf-iframe-container');
-            
-            placeholder.style.display = 'none';
-            
-            // Create actual iframe
-            const iframe = document.createElement('iframe');
-            iframe.className = 'hf-iframe';
-            iframe.src = 'https://huggingface.co/spaces/keras-io/vision-transformers?embed=true';
-            iframe.title = 'Bio-Inspired Sparse Vision Model Demo';
-            iframe.setAttribute('allow', 'accelerometer; ambient-light-sensor; autoplay; battery; camera; clipboard-write; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking');
-            iframe.setAttribute('sandbox', 'allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads');
-            
-            iframeContainer.appendChild(iframe);
-        }
-        
-        // Instructions for embedding your own Hugging Face Space
-        console.log(`To embed your Hugging Face Space:
-        1. Go to your Hugging Face Space page
-        2. Click the "Embed this Space" button
-        3. Copy the iframe code
-        4. Replace line 334 in the HTML with your iframe code
-        5. Update the iframe src with your Space URL`);
     </script>
 </body>
 </html>
