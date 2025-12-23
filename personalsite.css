@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Neuroscience PhD - University of Toronto</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #2d5016; /* Deep forest green */
+            --secondary-color: #5a8c5a; /* Muted sage green */
+            --accent-color: #c9a86a; /* Earthy gold */
+            --light-color: #f8f7f3; /* Warm off-white */
+            --dark-color: #3a3a3a; /* Soft dark gray */
+            --gray-color: #e8e6df; /* Warm light gray */
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 2rem;
+            --spacing-xl: 4rem;
+            --max-width: 1200px;
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+            --shadow: 0 4px 12px rgba(45, 80, 22, 0.08);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--light-color);
+            padding: 0;
+            margin: 0;
+        }
+        
+        a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--primary-color);
+        }
+        
+        .container {
+            width: 100%;
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        section {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: var(--spacing-md);
+            color: var(--primary-color);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        h2 {
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: var(--spacing-sm);
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+        
+        p {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--secondary-color);
+            color: white;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(248, 247, 243, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) 0;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+        
+        .logo span {
+            color: var(--secondary-color);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: var(--spacing-lg);
+        }
+        
+        .nav-links a {
+            color: var(--dark-color);
+            font-weight: 500;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: var(--spacing-xl) 0;
+            background: linear-gradient(135deg, #f8f7f3 0%, #e8e6df 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero:before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 60%;
+            height: 150%;
+            background-color: rgba(90, 140, 90, 0.05);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xl);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-text {
+            flex: 1;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: var(--shadow);
+            background-color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 4rem;
+        }
+        
+        .institution {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+            margin-bottom: var(--spacing-md);
+            font-weight: 500;
+        }
+        
+        .supervisor {
+            font-style: italic;
+            margin-bottom: var(--spacing-lg);
+            color: var(--dark-color);
+        }
+        
+        /* About Section */
+        .about {
+            background-color: white;
+        }
+        
+        /* Research Section */
+        .research {
+            background-color: var(--gray-color);
+        }
+        
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-lg);
+        }
+        
+        .research-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: var(--spacing-lg);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 4px solid var(--secondary-color);
+        }
+        
+        .research-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(45, 80, 22, 0.12);
+        }
+        
+        .research-icon {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        /* Publications Section */
+        .publications-list {
+            list-style-type: none;
+        }
+        
+        .publication-item {
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid #eee;
+            transition: var(--transition);
+        }
+        
+        .publication-item:hover {
+            background-color: rgba(90, 140, 90, 0.03);
+            padding-left: var(--spacing-md);
+            border-radius: var(--border-radius);
+        }
+        
+        .publication-item:last-child {
+            border-bottom: none;
+        }
+        
+        .pub-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .pub-authors {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 0.25rem;
+        }
+        
+        .pub-venue {
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+        
+        /* AI Demo Section */
+        .ai-demo {
+            background-color: white;
+        }
+        
+        .demo-container {
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .demo-header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .demo-title {
+            margin: 0;
+            font-size: 1.2rem;
+            color: white;
+        }
+        
+        .demo-title:after {
+            display: none;
+        }
+        
+        .hf-badge {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+        
+        .hf-iframe-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            overflow: hidden;
+            background-color: #f5f5f5;
+        }
+        
+        .hf-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .demo-loading {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            z-index: 10;
+            transition: opacity 0.3s ease;
+        }
+        
+        .demo-loading.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--gray-color);
+            border-top-color: var(--secondary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Links Section */
+        .links {
+            background-color: var(--gray-color);
+            text-align: center;
+        }
+        
+        .links-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-lg);
+        }
+        
+        .link-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 150px;
+            height: 150px;
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 4px solid var(--secondary-color);
+        }
+        
+        .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(45, 80, 22, 0.12);
+        }
+        
+        .link-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+            color: var(--secondary-color);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-md);
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: var(--spacing-md);
+            list-style: none;
+        }
+        
+        .footer-links a {
+            color: white;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.75rem;
+            }
+            
+            .hf-iframe-container {
+                height: 500px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: white;
+                padding: var(--spacing-md);
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hf-iframe-container {
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            section {
+                padding: var(--spacing-lg) 0;
+            }
+            
+            .research-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .link-card {
+                width: 130px;
+                height: 130px;
+            }
+            
+            .hf-iframe-container {
+                height: 350px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Visual<span>Neuro</span></div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#research">Research</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#ai-demo">AI Demo</a></li>
+                    <li><a href="#links">Links</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Visual Neuroscience Researcher</h1>
+                    <p class="institution">University of Toronto, 2nd Year PhD Candidate</p>
+                    <p class="supervisor">Working under Dr. Jay Pratt in the Department of Psychology</p>
+                    <p>My research focuses on the magno-parvo-koniocellular pathways and inhibition of return. I combine psychophysical experiments with computational modeling to understand visual processing, and create parameter-sparse computer vision models inspired by biological vision systems.</p>
+                    <a href="#ai-demo" class="btn" style="margin-top: var(--spacing-md);">Try My Model</a>
+                </div>
+                <div class="hero-image">
+                    <!-- Placeholder for profile image -->
+                    <div class="profile-img">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About Me</h2>
+            <p>I am a second-year PhD student in the Department of Psychology at the University of Toronto, working under the supervision of Dr. Jay Pratt. My research focuses on understanding the distinct contributions of magnocellular, parvocellular, and koniocellular pathways in visual processing, with particular emphasis on inhibition of return phenomena.</p>
+            <p>I employ psychophysical methods to investigate how these parallel visual pathways contribute to different aspects of visual perception and attention. My work bridges cognitive neuroscience and computational modeling to develop biologically-plausible explanations for visual behavior.</p>
+            <p>In parallel with my experimental work, I develop efficient, parameter-sparse computer vision models inspired by the organizational principles of the visual system. These models aim to achieve state-of-the-art performance with significantly reduced computational complexity compared to traditional deep learning approaches.</p>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research" class="research">
+        <div class="container">
+            <h2>Research Interests</h2>
+            <div class="research-grid">
+                <div class="research-card">
+                    <div class="research-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Visual Pathways</h3>
+                    <p>Investigating the distinct roles of magnocellular, parvocellular, and koniocellular pathways in visual processing and attention.</p>
+                </div>
+                <div class="research-card">
+                    <div class="research-icon">
+                        <i class="fas fa-search-minus"></i>
+                    </div>
+                    <h3>Inhibition of Return</h3>
+                    <p>Examining the temporal dynamics of spatial attention and the mechanisms underlying inhibition of return in visual search tasks.</p>
+                </div>
+                <div class="research-card">
+                    <div class="research-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3>Efficient Vision Models</h3>
+                    <p>Developing parameter-sparse computer vision architectures inspired by biological visual processing for efficient AI applications.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="publications">
+        <div class="container">
+            <h2>Selected Publications</h2>
+            <ul class="publications-list">
+                <li class="publication-item">
+                    <div class="pub-title">Magnocellular contributions to inhibition of return in visual search</div>
+                    <div class="pub-authors">Your Name, J. Pratt, et al.</div>
+                    <div class="pub-venue">Journal of Vision, 2023</div>
+                </li>
+                <li class="publication-item">
+                    <div class="pub-title">A parameter-sparse convolutional network inspired by parvocellular processing</div>
+                    <div class="pub-authors">Your Name</div>
+                    <div class="pub-venue">Neural Information Processing Systems (NeurIPS), 2022</div>
+                </li>
+                <li class="publication-item">
+                    <div class="pub-title">Temporal dynamics of koniocellular pathway activation in visual attention tasks</div>
+                    <div class="pub-authors">Your Name, J. Pratt</div>
+                    <div class="pub-venue">Attention, Perception, & Psychophysics, 2022</div>
+                </li>
+                <li class="publication-item">
+                    <div class="pub-title">Bio-inspired efficient vision: A sparse model for object recognition</div>
+                    <div class="pub-authors">Your Name</div>
+                    <div class="pub-venue">International Conference on Computer Vision (ICCV), 2021</div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- AI Demo Section -->
+    <section id="ai-demo" class="ai-demo">
+        <div class="container">
+            <h2>AI Model Demo</h2>
+            <p>This interactive demo showcases my parameter-sparse computer vision model inspired by biological visual processing. The model demonstrates efficient object recognition with significantly fewer parameters than traditional deep learning approaches.</p>
+            
+            <div class="demo-container">
+                <div class="demo-header">
+                    <h3 class="demo-title">Bio-Inspired Sparse Vision Model</h3>
+                    <span class="hf-badge">Hugging Face Space</span>
+                </div>
+                
+                <div class="hf-iframe-container">
+                    <div class="demo-loading" id="demoLoading">
+                        <div class="loading-spinner"></div>
+                        <p>Loading AI model demo...</p>
+                        <p><small>This may take a moment on first load</small></p>
+                    </div>
+                    
+                    <!-- Embed your Hugging Face Space here -->
+                    <!-- Replace the src with your actual Hugging Face Space URL -->
+                    <iframe 
+                        class="hf-iframe" 
+                        src="https://huggingface.co/spaces/keras-io/vision-transformers?embed=true" 
+                        title="Bio-Inspired Sparse Vision Model Demo"
+                        onload="document.getElementById('demoLoading').classList.add('hidden')"
+                        allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; clipboard-write; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+                        sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
+                    ></iframe>
+                    
+                    <!-- Alternative: If your model isn't on HF yet, use this placeholder -->
+                    <!-- <div class="demo-placeholder" id="demoPlaceholder">
+                        <i class="fas fa-robot"></i>
+                        <h3>Embed Your Hugging Face Space</h3>
+                        <p>To embed your model demo:</p>
+                        <ol style="text-align: left; max-width: 500px; margin: 1rem auto;">
+                            <li>Upload your model to Hugging Face Spaces</li>
+                            <li>Click "Embed this Space" on your Space page</li>
+                            <li>Copy the iframe code</li>
+                            <li>Replace the iframe src above with your URL</li>
+                        </ol>
+                        <button class="btn" onclick="loadExampleDemo()">Load Example Demo</button>
+                    </div> -->
+                </div>
+                
+                <div style="padding: var(--spacing-md); background-color: white; border-top: 1px solid var(--gray-color);">
+                    <p style="margin: 0; font-size: 0.9rem; color: #666;">
+                        <strong>Note:</strong> This demo shows a vision transformer model as an example. Replace the iframe URL with your actual Hugging Face Space to showcase your custom parameter-sparse vision model.
+                    </p>
+                </div>
+            </div>
+            
+            <div style="margin-top: var(--spacing-md); text-align: center;">
+                <p><small>Want to create your own Hugging Face Space? <a href="https://huggingface.co/spaces" target="_blank">Learn how here</a>.</small></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Links Section -->
+    <section id="links" class="links">
+        <div class="container">
+            <h2>Links & Resources</h2>
+            <p>Connect with me and access my academic materials.</p>
+            
+            <div class="links-grid">
+                <a href="https://github.com/yourusername" class="link-card" target="_blank">
+                    <div class="link-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="link-text">GitHub</div>
+                </a>
+                
+                <a href="/cv.pdf" class="link-card" target="_blank">
+                    <div class="link-icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </div>
+                    <div class="link-text">CV / Resume</div>
+                </a>
+                
+                <a href="https://scholar.google.com/citations?user=yourid" class="link-card" target="_blank">
+                    <div class="link-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="link-text">Google Scholar</div>
+                </a>
+                
+                <a href="https://huggingface.co/yourusername" class="link-card" target="_blank">
+                    <div class="link-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="link-text">Hugging Face</div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="copyright">
+                    &copy; 2023 Visual Neuroscience Researcher
+                </div>
+                <div class="affiliation">
+                    Department of Psychology, University of Toronto
+                </div>
+                <ul class="footer-links">
+                    <li><a href="mailto:your.email@utoronto.ca">Email</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            // Change icon based on menu state
+            const icon = mobileMenuBtn.querySelector('i');
+            if (navLinks.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Hide loading spinner when iframe loads
+        const iframe = document.querySelector('.hf-iframe');
+        const loadingSpinner = document.getElementById('demoLoading');
+        
+        iframe.addEventListener('load', () => {
+            loadingSpinner.classList.add('hidden');
+        });
+        
+        // If using placeholder, this function would load an example
+        function loadExampleDemo() {
+            const placeholder = document.getElementById('demoPlaceholder');
+            const iframeContainer = document.querySelector('.hf-iframe-container');
+            
+            placeholder.style.display = 'none';
+            
+            // Create actual iframe
+            const iframe = document.createElement('iframe');
+            iframe.className = 'hf-iframe';
+            iframe.src = 'https://huggingface.co/spaces/keras-io/vision-transformers?embed=true';
+            iframe.title = 'Bio-Inspired Sparse Vision Model Demo';
+            iframe.setAttribute('allow', 'accelerometer; ambient-light-sensor; autoplay; battery; camera; clipboard-write; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking');
+            iframe.setAttribute('sandbox', 'allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads');
+            
+            iframeContainer.appendChild(iframe);
+        }
+        
+        // Instructions for embedding your own Hugging Face Space
+        console.log(`To embed your Hugging Face Space:
+        1. Go to your Hugging Face Space page
+        2. Click the "Embed this Space" button
+        3. Copy the iframe code
+        4. Replace line 334 in the HTML with your iframe code
+        5. Update the iframe src with your Space URL`);
+    </script>
+</body>
+</html>
