@@ -1,874 +1,481 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visual Neuroscience PhD - University of Toronto</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description"
+        content="Daniel Lougen - PhD Student in Psychology at University of Toronto, researching visual perception and early visual pathways in the Visual Cognition Lab.">
+    <meta name="keywords"
+        content="Daniel Lougen, PhD, Psychology, Visual Cognition, University of Toronto, Visual Perception, Neuroscience">
+    <meta name="author" content="Daniel Lougen">
+    <title>Daniel Lougen | PhD Student in Visual Cognition</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* CSS Reset and Base Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --primary-color: #2d5016; /* Deep forest green */
-            --secondary-color: #5a8c5a; /* Muted sage green */
-            --accent-color: #c9a86a; /* Earthy gold */
-            --linkedin-color: #5a8c5a; /* LinkedIn brand color */
-            --light-color: #f8f7f3; /* Warm off-white */
-            --dark-color: #3a3a3a; /* Soft dark gray */
-            --gray-color: #e8e6df; /* Warm light gray */
-            --spacing-sm: 0.5rem;
-            --spacing-md: 1rem;
-            --spacing-lg: 2rem;
-            --spacing-xl: 4rem;
-            --max-width: 1200px;
-            --border-radius: 8px;
-            --transition: all 0.3s ease;
-            --shadow: 0 4px 12px rgba(45, 80, 22, 0.08);
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-            line-height: 1.6;
-            color: var(--dark-color);
-            background-color: var(--light-color);
-            padding: 0;
-            margin: 0;
-        }
-        
-        a {
-            color: var(--secondary-color);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        a:hover {
-            color: var(--primary-color);
-        }
-        
-        .container {
-            width: 100%;
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 var(--spacing-md);
-        }
-        
-        section {
-            padding: var(--spacing-xl) 0;
-        }
-        
-        h1, h2, h3, h4 {
-            font-weight: 600;
-            line-height: 1.3;
-            margin-bottom: var(--spacing-md);
-            color: var(--primary-color);
-        }
-        
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        h2 {
-            font-size: 2rem;
-            position: relative;
-            padding-bottom: var(--spacing-sm);
-            margin-bottom: var(--spacing-lg);
-        }
-        
-        h2:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background-color: var(--accent-color);
-        }
-        
-        p {
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background-color: var(--secondary-color);
-            color: white;
-            border-radius: var(--border-radius);
-            font-weight: 500;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .btn:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--secondary-color);
-            color: var(--secondary-color);
-        }
-        
-        .btn-outline:hover {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-        
-        .btn-linkedin {
-            background-color: var(--linkedin-color);
-            color: white;
-            border: 2px solid var(--linkedin-color);
-        }
-        
-        .btn-linkedin:hover {
-            background-color: #2d5016;
-            border-color: #2d5016;
-            color: white;
-        }
-        
-        /* Header Styles */
-        header {
-            background-color: rgba(248, 247, 243, 0.95);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(5px);
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: var(--spacing-md) 0;
-        }
-        
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-        }
-        
-        .logo span {
-            color: var(--secondary-color);
-        }
-        
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: var(--spacing-lg);
-        }
-        
-        .nav-links a {
-            color: var(--dark-color);
-            font-weight: 500;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary-color);
-        }
-        
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            cursor: pointer;
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: var(--spacing-xl) 0;
-            background: linear-gradient(135deg, #f8f7f3 0%, #e8e6df 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero:before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 60%;
-            height: 150%;
-            background-color: rgba(90, 140, 90, 0.05);
-            border-radius: 50%;
-            z-index: 0;
-        }
-        
-        .hero-content {
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-xl);
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hero-text {
-            flex: 1;
-        }
-        
-        .hero-image {
-            flex: 1;
-            text-align: center;
-        }
-        
-        .profile-img {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 5px solid white;
-            box-shadow: var(--shadow);
-            background-color: var(--secondary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-        }
-        
-        .institution {
-            color: var(--secondary-color);
-            font-size: 1.2rem;
-            margin-bottom: var(--spacing-md);
-            font-weight: 500;
-        }
-        
-        .supervisor {
-            font-style: italic;
-            margin-bottom: var(--spacing-lg);
-            color: var(--dark-color);
-        }
-        
-        /* About Section */
-        .about {
-            background-color: white;
-        }
-        
-        /* Research Section */
-        .research {
-            background-color: var(--gray-color);
-        }
-        
-        .research-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--spacing-lg);
-        }
-        
-        .research-card {
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: var(--spacing-lg);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border-top: 4px solid var(--secondary-color);
-        }
-        
-        .research-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(45, 80, 22, 0.12);
-        }
-        
-        .research-icon {
-            font-size: 2rem;
-            color: var(--secondary-color);
-            margin-bottom: var(--spacing-md);
-        }
-        
-        /* Publications Section */
-        .publications-list {
-            list-style-type: none;
-        }
-        
-        .publication-item {
-            padding: var(--spacing-md) 0;
-            border-bottom: 1px solid #eee;
-            transition: var(--transition);
-        }
-        
-        .publication-item:hover {
-            background-color: rgba(90, 140, 90, 0.03);
-            padding-left: var(--spacing-md);
-            border-radius: var(--border-radius);
-        }
-        
-        .publication-item:last-child {
-            border-bottom: none;
-        }
-        
-        .pub-title {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-        }
-        
-        .pub-authors {
-            font-style: italic;
-            color: #666;
-            margin-bottom: 0.25rem;
-        }
-        
-        .pub-venue {
-            color: var(--secondary-color);
-            font-weight: 500;
-        }
-        
-        /* AI Demo Section */
-        .ai-demo {
-            background-color: white;
-        }
-        
-        .demo-container {
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            margin-top: var(--spacing-lg);
-        }
-        
-        .demo-header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: var(--spacing-md);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .demo-title {
-            margin: 0;
-            font-size: 1.2rem;
-            color: white;
-        }
-        
-        .demo-title:after {
-            display: none;
-        }
-        
-        .hf-badge {
-            background-color: var(--accent-color);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-        
-        .hf-iframe-container {
-            position: relative;
-            width: 100%;
-            height: 600px;
-            overflow: hidden;
-            background-color: #f5f5f5;
-        }
-        
-        .hf-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        
-        .demo-loading {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background-color: white;
-            z-index: 10;
-            transition: opacity 0.3s ease;
-        }
-        
-        .demo-loading.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-        
-        .loading-spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid var(--gray-color);
-            border-top-color: var(--secondary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: var(--spacing-md);
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        /* Links Section */
-        .links {
-            background-color: var(--gray-color);
-            text-align: center;
-        }
-        
-        .links-grid {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: var(--spacing-md);
-            margin-top: var(--spacing-lg);
-        }
-        
-        .link-card {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 150px;
-            height: 150px;
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: var(--spacing-md);
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            border-top: 4px solid var(--secondary-color);
-        }
-        
-        .link-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(45, 80, 22, 0.12);
-        }
-        
-        .link-card.linkedin-card {
-            border-top: 4px solid var(--linkedin-color);
-        }
-        
-        .link-card.linkedin-card .link-icon {
-            color: var(--linkedin-color);
-        }
-        
-        .link-card.linkedin-card:hover {
-            box-shadow: 0 10px 25px rgba(0, 119, 181, 0.15);
-        }
-        
-        .link-icon {
-            font-size: 2.5rem;
-            margin-bottom: var(--spacing-md);
-            color: var(--secondary-color);
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            padding: var(--spacing-lg) 0;
-            text-align: center;
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--spacing-md);
-        }
-        
-        .footer-links {
-            display: flex;
-            gap: var(--spacing-md);
-            list-style: none;
-        }
-        
-        .footer-links a {
-            color: white;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
-            
-            h2 {
-                font-size: 1.75rem;
-            }
-            
-            .hf-iframe-container {
-                height: 500px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
-            
-            .nav-links.active {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: white;
-                padding: var(--spacing-md);
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            .footer-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .hf-iframe-container {
-                height: 400px;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            section {
-                padding: var(--spacing-lg) 0;
-            }
-            
-            .research-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .link-card {
-                width: 130px;
-                height: 130px;
-            }
-            
-            .hf-iframe-container {
-                height: 350px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <!-- Header with Navigation -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">Visual<span>Neuro</span></div>
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#research">Research</a></li>
-                    <li><a href="#posters">Posters</a></li>
-                    <li><a href="#publications">Publications</a></li>
-                    <li><a href="#ai-demo">AI Demo</a></li>
-                    <li><a href="#links">Links</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
+<body>
+    <div class="noise"></div>
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">DL</a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#research">Research</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="nav-toggle" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <main>
+        <section id="hero" class="hero">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Attention, Vision, Perception, Psychonomics, and Neuroscience</h1>
-                    <p class="institution">University of Toronto, 2nd Year PhD Candidate</p>
-                    <p class="supervisor">Advisor: Dr. Jay Pratt | Department of Psychology</p>
-                    <p>My research focuses on the Lateral Geniculate Nucleus pathways (LGN), Retinotectal pathways, and Inhibition of Return (IOR). I combine psychophysical experiments with computational modeling to understand visual processing.</p>
-                    <a href="#ai-demo" class="btn" style="margin-top: var(--spacing-md);">Try My Model</a>
-                </div>
-                <div class="hero-image">
-                    <!-- Placeholder for profile image -->
-                    <div class="profile-img">
-                        <i class="fas fa-brain"></i>
+                    <div class="profile-image-container">
+                        <div class="profile-image-wrapper">
+                            <img src="IMG_6325.jpg" alt="Daniel Lougen" class="profile-image">
+                            <div class="profile-image-glow"></div>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <p>I am a second-year PhD student in the Department of Psychology at the University of Toronto, working under the supervision of Dr. Jay Pratt. My research focuses on psychophysical experiments elucidating the underlying fundamentals of IOR.</p>
-            <p>I'm also researching the early visual systems with particular focus on the retinal ganglion cells, LGN, and retinotectal pathways. My work bridges cognitive neuroscience and computational modeling to develop biologically-plausible explanations for visual behavior.</p>
-            <p>In parallel with my experimental work, I develop efficient, parameter-sparse computer vision models inspired by the organizational principles of the early visual system. These models aim to achieve frontier efficiency performance with increased interpretability compared to traditional deep learning approaches.</p>
-        </div>
-    </section>
-
-    <!-- Research Section -->
-    <section id="research" class="research">
-        <div class="container">
-            <h2>Research Interests</h2>
-            <div class="research-grid">
-                <div class="research-card">
-                    <div class="research-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <h3>Visual Pathways</h3>
-                    <p>Investigating the distinct roles of magnocellular, parvocellular, and koniocellular pathways in visual processing and attention.</p>
-                </div>
-                <div class="research-card">
-                    <div class="research-icon">
-                        <i class="fas fa-search-minus"></i>
-                    </div>
-                    <h3>Inhibition of Return</h3>
-                    <p>Examining the temporal dynamics of spatial attention and the mechanisms underlying IOR in visual search tasks.</p>
-                </div>
-                <div class="research-card">
-                    <div class="research-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3>Efficient Vision Models</h3>
-                    <p>Developing parameter-sparse computer vision architectures inspired by biological visual processing for efficient AI applications.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Posters Section -->
-    <section id="posters" class="poster">
-        <div class="container">
-            <h2>Selected Conference Posters</h2>            
-            <!-- PDF embedded using an iframe -->
-            <div style="width: 100%; height: 600px; border: 1px solid var(--gray-color); border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow); margin-top: var(--spacing-lg);">
-                <h3 style="padding: var(--spacing-md); background-color: var(--secondary-color); color: white; margin: 0;">Vision Science Society 2024</h3>
-                <iframe 
-                    src="posters/VSSIORposter.pdf" 
-                    width="100%" 
-                    height="100%" 
-                    style="border: none;"
-                    title="VSS 2024 Poster">
-                    <p><a href="posters/VSSIORposter.pdf"></a>.</p>
-                </iframe>
-            </div>
-        </div>
-    </section>
-
-        <section id="posters" class="poster">
-        <div class="container">
-            <!-- PDF embedded using an iframe -->
-            <div style="width: 100%; height: 600px; border: 1px solid var(--gray-color); border-radius: var(--border-radius); overflow: hidden; box-shadow: var(--shadow); margin-top: var(--spacing-lg);">
-                <h3 style="padding: var(--spacing-md); background-color: var(--secondary-color); color: white; margin: 0;">Vision Science Society 2023 & Psychonomics 2024</h3>
-                <iframe 
-                    src="posters/VSS23G-L-processing.pdf" 
-                    width="100%" 
-                    height="100%" 
-                    style="border: none;"
-                    title="Dissecting the Reaction Times of Global and Local Processing Poster">
-                    <p><a href="posters/VSS23G-L-processing.pdf"></a>.</p>
-                </iframe>
-            </div>
-        </div>
-    </section>
-
-    <!-- Publications Section -->
-    <section id="publications" class="publications">
-        <div class="container">
-            <h2>Selected Publications</h2>
-            <ul class="publications-list">
-                <li class="publication-item">
-                    <div class="pub-title">Inclusive VR through inclusive co-design with neurodiverse learners</div>
-                    <div class="pub-authors">Ibrahim Dahlstrom-Hakki, Teon Edwards, Jamie Larsen, Zachary Alstad, Gerald Belton, Daniel Lougen, Daniel Santana</div>
-                    <div class="pub-venue">ILRN, 2021</div>
-                </li>
-            </ul>
-        </div>
-    </section>
-    <!-- AI Demo Section -->
-    <section id="ai-demo" class="ai-demo">
-        <div class="container">
-            <h2>AI Model Demo</h2>
-            <p>Example HF embedded space for object detection demo using YOLO11</p>
-            
-            <div class="demo-container">
-                <div class="demo-header">
-                    <h3 class="demo-title">placeholder space</h3>
-                    <span class="hf-badge">Hugging Face Space</span>
-                </div>
-                
-                <div class="hf-iframe-container">
-                    <div class="demo-loading" id="demoLoading">
-                        <div class="loading-spinner"></div>
-                        <p>Loading AI model demo...</p>
-                        <p><small>This may take a moment on first load</small></p>
-                    </div>
-                    
-                    <iframe 
-                        class="hf-iframe" 
-                        src="https://ultralytics-yolo11.hf.space/?__theme=dark" 
-                        title="YOLO11 Demo"
-                        onload="document.getElementById('demoLoading').classList.add('hidden')"
-                        allow="accelerometer; ambient-light-sensor; autoplay; battery; camera; clipboard-write; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-                        sandbox="allow-forms allow-modals allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts allow-downloads"
-                    ></iframe>
-                </div>
-                
-                <div style="padding: var(--spacing-md); background-color: white; border-top: 1px solid var(--gray-color);">
-                    <p style="margin: 0; font-size: 0.9rem; color: #666;">
-                        <strong>Note:</strong> placeholder space.
+                    <p class="hero-subtitle">PhD Student in Psychology</p>
+                    <h1 class="hero-title">Daniel Lougen</h1>
+                    <p class="hero-description">
+                        Exploring the mysteries of <span class="highlight">visual perception</span> and
+                        <span class="highlight">early visual pathways</span> at the University of Toronto's
+                        Visual Cognition Lab.
                     </p>
+                    <div class="academic-badges">
+                        <a href="https://orcid.org/0009-0001-5540-9685" target="_blank" rel="noopener noreferrer" class="badge-item" title="ORCID iD: 0009-0001-5540-9685">
+                            <svg class="badge-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 4.078-1.266 4.078-3.722 0-2.203-1.344-3.722-3.925-3.722h-2.45z"/>
+                            </svg>
+                            <span>ORCID</span>
+                        </a>
+                        <a href="https://scholar.google.com/citations?user=r8Vs4lwAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="badge-item" title="Google Scholar Profile">
+                            <svg class="badge-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/>
+                            </svg>
+                            <span>Scholar</span>
+                        </a>
+                        <a href="https://pratt.psych.utoronto.ca/visual-cognition-lab/" target="_blank" rel="noopener noreferrer" class="badge-item" title="Visual Cognition Lab">
+                            <svg class="badge-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
+                            </svg>
+                            <span>Lab</span>
+                        </a>
+                    </div>
+                    <div class="hero-cta">
+                        <a href="#research" class="btn btn-primary">View Research</a>
+                        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <canvas id="particle-canvas"></canvas>
+                    <div class="neural-visualization">
+                        <div class="neuron-ring ring-1"></div>
+                        <div class="neuron-ring ring-2"></div>
+                        <div class="neuron-ring ring-3"></div>
+                        <div class="synapse synapse-1"></div>
+                        <div class="synapse synapse-2"></div>
+                        <div class="synapse synapse-3"></div>
+                        <div class="synapse synapse-4"></div>
+                        <div class="synapse synapse-5"></div>
+                        <div class="synapse synapse-6"></div>
+                        <div class="neuron-core">
+                            <div class="core-inner"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+            <div class="scroll-indicator">
+                <span>Scroll to explore</span>
+                <div class="scroll-arrow"></div>
+            </div>
+        </section>
 
-    <!-- Links Section -->
-    <section id="links" class="links">
-        <div class="container">
-            <h2>Links & Resources</h2>            
-            <div class="links-grid">
-                <a href="https://github.com/DJLougen" class="link-card" target="_blank">
-                    <div class="link-icon">
-                        <i class="fab fa-github"></i>
+        <section id="about" class="section about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p class="lead">
+                            I'm a second-year PhD student in the <strong>Visual Cognition Lab</strong> at the
+                            University of Toronto, working under the supervision of <strong>Dr. Jay Pratt</strong>.
+                        </p>
+                        <p>
+                            My primary research focuses on understanding sensory processing in critical brain
+                            structures:
+                            the <em>lateral geniculate nucleus (LGN)</em>, the <em>retinotectal pathway</em>, and
+                            <em>retinogeniculate cells</em>. I'm particularly fascinated by how visual information is
+                            processed
+                            before it reaches conscious awareness. I'm also exploring meta-aspects of
+                            <em>inhibition of return (IOR)</em>, a fundamental mechanism in visual attention.
+                        </p>
+                        <p>
+                            As a secondary line of research, I develop <strong>bio-constrained vision models</strong>
+                            using PyTorch, bridging computational approaches with our understanding of biological vision
+                            systems. My goal is to create local/edge efficient models based on biological priors and
+                            constraints to solve real-world problems. I train these models on a MacBook Pro M3 Max and
+                            an NVIDIA DGX Spark.
+                        </p>
                     </div>
-                    <div class="link-text">GitHub</div>
-                </a>
-                
-                <a href="/cv.pdf" class="link-card" target="_blank">
-                    <div class="link-icon">
-                        <i class="fa-solid fa-file"></i>
+                    <div class="skills-grid">
+                        <div class="skill-card" data-progress="95">
+                            <div class="skill-icon">🧠</div>
+                            <h3>Cognitive Neuroscience</h3>
+                            <p>Visual perception, attention, psychometrics</p>
+                            <div class="skill-progress">
+                                <svg width="50" height="50" viewBox="0 0 50 50">
+                                    <defs>
+                                        <linearGradient id="skillGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle class="skill-progress-bg" cx="25" cy="25" r="20"></circle>
+                                    <circle class="skill-progress-fill" cx="25" cy="25" r="20" style="stroke: url(#skillGradient1)"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-progress="90">
+                            <div class="skill-icon">💻</div>
+                            <h3>Computational</h3>
+                            <p>Python, PyTorch, R, Computer Vision</p>
+                            <div class="skill-progress">
+                                <svg width="50" height="50" viewBox="0 0 50 50">
+                                    <defs>
+                                        <linearGradient id="skillGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle class="skill-progress-bg" cx="25" cy="25" r="20"></circle>
+                                    <circle class="skill-progress-fill" cx="25" cy="25" r="20" style="stroke: url(#skillGradient2)"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-progress="85">
+                            <div class="skill-icon">🔬</div>
+                            <h3>Methods</h3>
+                            <p>Eye-tracking, VR/AR, PsychoPy</p>
+                            <div class="skill-progress">
+                                <svg width="50" height="50" viewBox="0 0 50 50">
+                                    <defs>
+                                        <linearGradient id="skillGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle class="skill-progress-bg" cx="25" cy="25" r="20"></circle>
+                                    <circle class="skill-progress-fill" cx="25" cy="25" r="20" style="stroke: url(#skillGradient3)"></circle>
+                                </svg>
+                            </div>
+                        </div>
+                        <div class="skill-card" data-progress="80">
+                            <div class="skill-icon">🛠️</div>
+                            <h3>Engineering</h3>
+                            <p>Arduino, ESP32, CAD, 3D Printing</p>
+                            <div class="skill-progress">
+                                <svg width="50" height="50" viewBox="0 0 50 50">
+                                    <defs>
+                                        <linearGradient id="skillGradient4" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
+                                            <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
+                                        </linearGradient>
+                                    </defs>
+                                    <circle class="skill-progress-bg" cx="25" cy="25" r="20"></circle>
+                                    <circle class="skill-progress-fill" cx="25" cy="25" r="20" style="stroke: url(#skillGradient4)"></circle>
+                                </svg>
+                            </div>
+                        </div>
                     </div>
-                    <div class="link-text">CV</div>
-                </a>
-                
-                <a href="https://scholar.google.com/citations?user=r8Vs4lwAAAAJ&hl=en" class="link-card" target="_blank">
-                    <div class="link-icon">
-                        <i class="fas fa-graduation-cap"></i>
-                    </div>
-                    <div class="link-text">Google Scholar</div>
-                </a>
-                
-                <a href="https://huggingface.co/DJLougen" class="link-card" target="_blank">
-                    <div class="link-icon">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <div class="link-text">HuggingFace</div>
-                </a>
-                
-                <!-- LinkedIn Card -->
-                <a href="https://linkedin.com/in/djlougen" class="link-card linkedin-card" target="_blank">
-                    <div class="link-icon">
-                        <i class="fab fa-linkedin"></i>
-                    </div>
-                    <div class="link-text">LinkedIn</div>
-                </a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Footer -->
-    <footer>
+        <section id="research" class="section research">
+            <div class="container">
+                <h2 class="section-title">Research Focus</h2>
+                <div class="research-grid">
+                    <div class="research-card featured">
+                        <div class="research-number">01</div>
+                        <h3>Early Visual Pathways</h3>
+                        <p>
+                            Investigating how visual information is processed in subcortical structures,
+                            particularly the lateral geniculate nucleus, superior colliculus, and pulvinar,
+                            before reaching the cortex.
+                        </p>
+                        <div class="research-abstract">
+                            My research focuses on understanding the functional architecture of early visual processing before cortical involvement. Using psychophysical methods and computational modeling, I investigate how the LGN, superior colliculus, and pulvinar contribute to visual awareness and attention. This work has implications for understanding blindsight, attentional capture, and the neural basis of consciousness.
+                        </div>
+                        <button class="research-expand-btn">Read more</button>
+                        <div class="research-tags">
+                            <span class="tag">LGN<span class="tag-tooltip">Lateral Geniculate Nucleus - visual relay</span></span>
+                            <span class="tag">Superior Colliculus<span class="tag-tooltip">Subcortical visual-motor structure</span></span>
+                            <span class="tag">Pulvinar<span class="tag-tooltip">Thalamic attention regulation</span></span>
+                        </div>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-number">02</div>
+                        <h3>Bio-Constrained Vision Models</h3>
+                        <p>
+                            Building computational models from scratch in PyTorch that respect biological
+                            constraints, creating more realistic simulations of human visual processing.
+                        </p>
+                        <div class="research-abstract">
+                            I develop edge-efficient vision models incorporating biological constraints like receptive field organization, center-surround antagonism, and magnocellular/parvocellular pathway distinctions. These models achieve competitive performance with fewer parameters while maintaining biological plausibility, offering insights into both neuroscience and efficient AI design.
+                        </div>
+                        <button class="research-expand-btn">Read more</button>
+                        <div class="research-tags">
+                            <span class="tag">PyTorch<span class="tag-tooltip">Deep learning framework</span></span>
+                            <span class="tag">Computer Vision<span class="tag-tooltip">Image understanding & processing</span></span>
+                            <span class="tag">Neural Networks<span class="tag-tooltip">Biologically-inspired architectures</span></span>
+                        </div>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-number">03</div>
+                        <h3>Inhibition of Return</h3>
+                        <p>
+                            Exploring meta-aspects of inhibition of return (IOR), a phenomenon where attention
+                            is temporarily delayed from returning to previously attended locations.
+                        </p>
+                        <div class="research-abstract">
+                            My work investigates the temporal dynamics and spatial characteristics of IOR, examining how this mechanism shapes visual search efficiency and scene exploration. Using spatial frequency manipulations, I explore the differential roles of magnocellular and parvocellular pathways in IOR, revealing how different visual processing streams contribute to attentional inhibition mechanisms.
+                        </div>
+                        <button class="research-expand-btn">Read more</button>
+                        <div class="research-tags">
+                            <span class="tag">Attention<span class="tag-tooltip">Visual attention mechanisms</span></span>
+                            <span class="tag">IOR<span class="tag-tooltip">Inhibition of Return phenomenon</span></span>
+                            <span class="tag">Spatial Frequency<span class="tag-tooltip">Magno/Parvo pathway investigation</span></span>
+                        </div>
+                    </div>
+                    <div class="research-card">
+                        <div class="research-number">04</div>
+                        <h3>Neurodiversity & VR</h3>
+                        <p>
+                            Previous work developing VR technologies for neurodiverse learners—by us, for us.
+                            As a neurodivergent researcher, I studied bistable perception in neurodivergent populations
+                            in collaboration with Dartmouth College.
+                        </p>
+                        <div class="research-abstract">
+                            Through participatory co-design with neurodiverse learners, I developed inclusive VR learning environments for STEM education. As a neurodivergent researcher myself, this work represents authentic community-driven research. I also contributed to a collaborative study between Dartmouth College and Landmark College examining differences in bistable perception across neurodivergent populations, revealing insights into perceptual stability and individual differences in visual processing that challenge neurotypical assumptions about perception.
+                        </div>
+                        <button class="research-expand-btn">Read more</button>
+                        <div class="research-tags">
+                            <span class="tag">Virtual Reality<span class="tag-tooltip">Immersive learning environments</span></span>
+                            <span class="tag">Neurodiversity<span class="tag-tooltip">Inclusive design research</span></span>
+                            <span class="tag">STEM Education<span class="tag-tooltip">Science & technology learning</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="section education">
+            <div class="container">
+                <h2 class="section-title">Education</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker current"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2024 — Present</span>
+                            <h3>Doctor of Philosophy in Psychology</h3>
+                            <p class="institution">University of Toronto</p>
+                            <p>Visual Cognition Lab • Supervisor: Dr. Jay Pratt</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2021 — 2023</span>
+                            <h3>Master of Science in Psychology</h3>
+                            <p class="institution">University of Oregon</p>
+                            <p>Action and Perception Lab • Supervisor: Dr. Paul Dassonville</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <span class="timeline-date">2018 — 2019</span>
+                            <h3>Bachelor of Arts in Psychology</h3>
+                            <p class="institution">Landmark College</p>
+                            <p>Summa Cum Laude</p>
+                            <p class="achievement">Founding member of the cognitive neuroscience lab</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="publications" class="section publications">
+            <div class="container">
+                <h2 class="section-title">Publications & Presentations</h2>
+                <div class="publication-list">
+                    <article class="publication-item">
+                        <div class="publication-year">2024</div>
+                        <div class="publication-content">
+                            <div class="publication-header">
+                                <h3>Does Inhibition of Return Care About Spatial Frequency?</h3>
+                                <span class="conference-badge poster">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 3h18v18H3V3z"/>
+                                        <path d="M7 7h10M7 12h10M7 17h6"/>
+                                    </svg>
+                                    Poster
+                                </span>
+                            </div>
+                            <p class="publication-venue">Vision Sciences Society (VSS) Annual Meeting 2024</p>
+                            <p class="publication-description">
+                                Investigating whether inhibition of return mechanisms are sensitive to spatial frequency
+                                variations, examining the interplay between attentional processes and early visual
+                                feature processing in the retinotectal pathway.
+                            </p>
+                            <a href="https://www.researchgate.net/publication/393728840_Does_Inhibition_of_Return_Care_About_Spatial_Frequency"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="publication-link">
+                                View on ResearchGate →
+                            </a>
+                        </div>
+                    </article>
+                    <article class="publication-item">
+                        <div class="publication-year">2023</div>
+                        <div class="publication-content">
+                            <div class="publication-header">
+                                <h3>Dissecting the Reaction Times of Global and Local Processing</h3>
+                                <span class="conference-badge poster">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M3 3h18v18H3V3z"/>
+                                        <path d="M7 7h10M7 12h10M7 17h6"/>
+                                    </svg>
+                                    Poster
+                                </span>
+                            </div>
+                            <p class="publication-venue">Vision Sciences Society (VSS) Annual Meeting 2023</p>
+                            <p class="publication-description">
+                                Analyzing the temporal dynamics of hierarchical visual processing by decomposing
+                                reaction time distributions in global-local perception tasks, revealing insights into
+                                the time course of visual information integration.
+                            </p>
+                            <a href="https://www.researchgate.net/publication/381514467_Dissecting_the_Reaction_Times_of_Global_and_Local_Processing"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="publication-link">
+                                View on ResearchGate →
+                            </a>
+                        </div>
+                    </article>
+                    <article class="publication-item">
+                        <div class="publication-year">2021</div>
+                        <div class="publication-content">
+                            <div class="publication-header">
+                                <h3>Inclusive VR through Inclusive Co-Design with Neurodiverse Learners</h3>
+                                <span class="conference-badge">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/>
+                                    </svg>
+                                    Conference
+                                </span>
+                            </div>
+                            <p class="publication-venue">7th International Conference of the Immersive Learning Research
+                                Network (iLRN)</p>
+                            <p class="publication-description">
+                                Research exploring how virtual reality can be designed inclusively with and for
+                                neurodiverse learners, applying co-design methodologies to create more accessible
+                                immersive learning experiences.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact">
+            <div class="container">
+                <h2 class="section-title">Get in Touch</h2>
+                <div class="contact-content">
+                    <p class="contact-lead">
+                        I'm always interested in discussing visual cognition research, potential collaborations,
+                        or just connecting with fellow researchers and curious minds.
+                    </p>
+                    <div class="contact-links">
+                        <a href="https://www.linkedin.com/in/djlougen/" target="_blank" rel="noopener noreferrer"
+                            class="contact-card">
+                            <div class="contact-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="currentColor">
+                                    <path
+                                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                                </svg>
+                            </div>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="mailto:d.lougen@mail.utoronto.ca" class="contact-card">
+                            <div class="contact-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <rect width="20" height="16" x="2" y="4" rx="2" />
+                                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                                </svg>
+                            </div>
+                            <span>Email</span>
+                        </a>
+                        <a href="https://www.psych.utoronto.ca/" target="_blank" rel="noopener noreferrer"
+                            class="contact-card">
+                            <div class="contact-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                                    <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                                </svg>
+                            </div>
+                            <span>Department</span>
+                        </a>
+                        <a href="https://github.com/DJLougen" target="_blank" rel="noopener noreferrer"
+                            class="contact-card">
+                            <div class="contact-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="currentColor">
+                                    <path
+                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                                </svg>
+                            </div>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://huggingface.co/DJLougen" target="_blank" rel="noopener noreferrer"
+                            class="contact-card">
+                            <div class="contact-icon">
+                                <img src="huggingface(1).svg" alt="Hugging Face" width="24" height="24">
+                            </div>
+                            <span>Hugging Face</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="copyright">
-                    &copy; 2024 Visual Neuroscience Researcher
-                </div>
-                <div class="affiliation">
-                    Department of Psychology, University of Toronto
-                </div>
-                <ul class="footer-links">
-                    <li><a href="mailto:d.lougen@mail.utoronto.ca">Email</a></li>
-                    <li><a href="https://linkedin.com/in/djlougen" target="_blank">LinkedIn</a></li>
-                    <li><a href="#privacy">Privacy</a></li>
-                </ul>
-            </div>
-            
-            <!-- Social Media Links -->
-            <div style="margin-top: var(--spacing-md); text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: var(--spacing-md);">
-                <p style="margin-bottom: var(--spacing-sm); font-size: 0.9rem;">Connect with me:</p>
-                <div style="display: flex; justify-content: center; gap: var(--spacing-lg);">
-                    <a href="https://github.com/DJLougen" target="_blank" style="color: white; font-size: 1.5rem;">
-                        <i class="fab fa-github"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/djlougen/" target="_blank" style="color: white; font-size: 1.5rem;">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://scholar.google.com/citations?user=r8Vs4lwAAAAJ&hl=en" target="_blank" style="color: white; font-size: 1.5rem;">
-                        <i class="fas fa-graduation-cap"></i>
-                    </a>
-                    <a href="https://huggingface.co/DJLougen" target="_blank" style="color: white; font-size: 1.5rem;">
-                        <i class="fas fa-huggingface"></i>
-                    </a>
-                </div>
-            </div>
+            <p>© 2024 Daniel Lougen. Built with curiosity about the visual world.</p>
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navLinks = document.getElementById('navLinks');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            
-            // Change icon based on menu state
-            const icon = mobileMenuBtn.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            } else {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-        
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            });
-        });
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-        
-        // Hide loading spinner when iframe loads
-        const iframe = document.querySelector('.hf-iframe');
-        const loadingSpinner = document.getElementById('demoLoading');
-        
-        iframe.addEventListener('load', () => {
-            loadingSpinner.classList.add('hidden');
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
+
 </html>
