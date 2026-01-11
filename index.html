@@ -4,473 +4,278 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Daniel Lougen - PhD Student in Psychology at University of Toronto, researching visual perception and early visual pathways in the Visual Cognition Lab.">
-    <meta name="keywords"
-        content="Daniel Lougen, PhD, Psychology, Visual Cognition, University of Toronto, Visual Perception, Neuroscience">
-    <meta name="author" content="Daniel Lougen">
-    <title>Daniel Lougen | PhD Student in Visual Cognition</title>
+    <meta name="description" content="Daniel Lougen - Visual Cognition Researcher at University of Toronto">
+    <title>Daniel Lougen | Visual Cognition</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div class="noise"></div>
-    <div class="gradient-orb orb-1"></div>
-    <div class="gradient-orb orb-2"></div>
+    <div class="cursor-glow"></div>
 
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">DL</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#research">Research</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#publications">Publications</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <button class="nav-toggle" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+    <nav class="nav">
+        <a href="#" class="nav-logo">DL<span class="blink">_</span></a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#research">Research</a>
+            <a href="#work">Work</a>
+            <a href="#contact">Contact</a>
         </div>
+        <button class="nav-toggle" aria-label="Menu">
+            <span></span>
+        </button>
     </nav>
 
     <main>
-        <section id="hero" class="hero">
+        <section class="hero">
+            <div class="hero-visual">
+                <canvas id="perception-field"></canvas>
+            </div>
+
             <div class="hero-content">
-                <div class="hero-text">
-                    <div class="profile-image-container">
-                        <div class="profile-image-wrapper">
-                            <img src="IMG_6325.jpg" alt="Daniel Lougen" class="profile-image">
-                            <div class="profile-image-glow"></div>
-                        </div>
-                    </div>
-                    <p class="hero-subtitle">PhD Student in Psychology</p>
-                    <h1 class="hero-title">Daniel Lougen</h1>
-                    <p class="hero-description">
-                        Exploring the mysteries of <span class="highlight">visual perception</span> and
-                        <span class="highlight">early visual pathways</span> at the University of Toronto's
-                        Visual Cognition Lab.
-                    </p>
-                    <div class="academic-badges">
-                        <a href="https://orcid.org/0009-0001-5540-9685" target="_blank" rel="noopener noreferrer" class="badge-item" title="ORCID iD: 0009-0001-5540-9685">
-                            <svg class="badge-icon" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c2.359 0 4.078-1.266 4.078-3.722 0-2.203-1.344-3.722-3.925-3.722h-2.45z"/>
-                            </svg>
-                            <span>ORCID</span>
-                        </a>
-                        <a href="https://scholar.google.com/citations?user=r8Vs4lwAAAAJ&hl=en" target="_blank" rel="noopener noreferrer" class="badge-item" title="Google Scholar Profile">
-                            <svg class="badge-icon" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/>
-                            </svg>
-                            <span>Scholar</span>
-                        </a>
-                        <a href="https://pratt.psych.utoronto.ca/visual-cognition-lab/" target="_blank" rel="noopener noreferrer" class="badge-item" title="Visual Cognition Lab">
-                            <svg class="badge-icon" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M12 3L1 9l11 6 9-4.91V17h2V9M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/>
-                            </svg>
-                            <span>Lab</span>
-                        </a>
-                        <a href="https://github.com/DJLougen/MPKnet" target="_blank" rel="noopener noreferrer" class="badge-item" title="MPKnet - Bio-Constrained Vision Model">
-                            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-                                <line x1="12" y1="22.08" x2="12" y2="12"/>
-                            </svg>
-                            <span>MPKnet</span>
-                        </a>
-                    </div>
-                    <div class="hero-cta">
-                        <a href="#research" class="btn btn-primary">View Research</a>
-                        <a href="#contact" class="btn btn-secondary">Get in Touch</a>
-                    </div>
-                </div>
-                <div class="hero-visual">
-                    <canvas id="particle-canvas"></canvas>
-                    <div class="neural-visualization">
-                        <div class="neuron-ring ring-1"></div>
-                        <div class="neuron-ring ring-2"></div>
-                        <div class="neuron-ring ring-3"></div>
-                        <div class="synapse synapse-1"></div>
-                        <div class="synapse synapse-2"></div>
-                        <div class="synapse synapse-3"></div>
-                        <div class="synapse synapse-4"></div>
-                        <div class="synapse synapse-5"></div>
-                        <div class="synapse synapse-6"></div>
-                        <div class="neuron-core">
-                            <div class="core-inner"></div>
-                        </div>
-                    </div>
+                <div class="hero-tag">Visual Cognition Researcher</div>
+                <h1 class="hero-title">
+                    <span class="line">Daniel</span>
+                    <span class="line accent">Lougen</span>
+                </h1>
+                <p class="hero-sub">
+                    Investigating how the brain processes visual information
+                    before conscious awareness at the <strong>University of Toronto</strong>
+                </p>
+                <div class="hero-actions">
+                    <a href="#research" class="btn btn-primary">View Research</a>
+                    <a href="#contact" class="btn btn-outline">Get in Touch</a>
                 </div>
             </div>
-            <div class="scroll-indicator">
-                <span>Scroll to explore</span>
-                <div class="scroll-arrow"></div>
+
+            <div class="hero-scroll">
+                <span>Scroll</span>
+                <div class="scroll-indicator"></div>
             </div>
         </section>
 
-        <section id="about" class="section about">
+        <section class="about" id="about">
             <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p class="lead">
-                            I'm a second-year PhD student in the <strong>Visual Cognition Lab</strong> at the
-                            University of Toronto, working under the supervision of <strong>Dr. Jay Pratt</strong>.
-                        </p>
-                        <p>
-                            My primary research focuses on understanding sensory processing in critical brain
-                            structures:
-                            the <em>lateral geniculate nucleus (LGN)</em>, the <em>retinotectal pathway</em>, and
-                            <em>retinogeniculate cells</em>. I'm particularly fascinated by how visual information is
-                            processed
-                            before it reaches conscious awareness. I'm also exploring meta-aspects of
-                            <em>inhibition of return (IOR)</em>, a fundamental mechanism in visual attention.
-                        </p>
-                        <p>
-                            As a secondary line of research, I develop <strong>bio-constrained vision models</strong>
-                            using PyTorch, bridging computational approaches with our understanding of biological vision
-                            systems. My goal is to create local/edge efficient models based on biological priors and
-                            constraints to solve real-world problems. I train these models on a MacBook Pro M3 Max and
-                            an NVIDIA DGX Spark.
-                        </p>
+                <div class="section-label">01 / About</div>
+                <div class="about-layout">
+                    <div class="about-main">
+                        <h2 class="section-title">
+                            Exploring the <em>earliest stages</em> of visual processing
+                        </h2>
+                        <div class="about-text">
+                            <p>
+                                I'm a PhD student in the <strong>Visual Cognition Lab</strong> at the
+                                University of Toronto, supervised by Dr. Jay Pratt. My research focuses
+                                on the lateral geniculate nucleus, retinotectal pathway, and how visual
+                                information is processed before reaching conscious awareness.
+                            </p>
+                            <p>
+                                As a secondary line of research, I develop bio-constrained vision models
+                                using PyTorch—bridging computational approaches with biological vision systems.
+                            </p>
+                        </div>
                     </div>
-                    <div class="skills-grid">
-                        <div class="skill-card" data-progress="95">
-                            <div class="skill-icon">🧠</div>
-                            <h3>Cognitive Neuroscience</h3>
-                            <p>Visual perception, attention, psychometrics</p>
-                            <div class="skill-progress">
-                                <svg width="50" height="50" viewBox="0 0 50 50">
-                                    <defs>
-                                        <linearGradient id="skillGradient1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
-                                            <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
-                                        </linearGradient>
-                                    </defs>
-                                    <circle class="skill-progress-bg" cx="25" cy="25" r="20"></circle>
-                                    <circle class="skill-progress-fill" cx="25" cy="25" r="20" style="stroke: url(#skillGradient1)"></circle>
-                                </svg>
-                            </div>
+                    <div class="about-side">
+                        <div class="about-image">
+                            <img src="IMG_6325.jpg" alt="Daniel Lougen">
                         </div>
-                        <div class="skill-card" data-progress="90">
-                            <div class="skill-icon">💻</div>
-                            <h3>Computational</h3>
-                            <p>Python, PyTorch, R, Computer Vision</p>
-                            <div class="skill-progress">
-                                <svg width="50" height="50" viewBox="0 0 50 50">
-                                    <defs>
-                                        <linearGradient id="skillGradient2" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
-                                            <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
-                                        </linearGradient>
-                                    </defs>
-                                    <circle class="skill-progress-bg" cx="25" cy="25" r="20"></circle>
-                                    <circle class="skill-progress-fill" cx="25" cy="25" r="20" style="stroke: url(#skillGradient2)"></circle>
-                                </svg>
-                            </div>
+                        <div class="about-links">
+                            <a href="https://orcid.org/0009-0001-5540-9685" target="_blank">ORCID</a>
+                            <a href="https://scholar.google.com/citations?user=r8Vs4lwAAAAJ" target="_blank">Google Scholar</a>
+                            <a href="https://github.com/DJLougen/MPKnet" target="_blank">MPKnet</a>
                         </div>
-                        <div class="skill-card" data-progress="85">
-                            <div class="skill-icon">🔬</div>
-                            <h3>Methods</h3>
-                            <p>Eye-tracking, VR/AR, PsychoPy</p>
-                            <div class="skill-progress">
-                                <svg width="50" height="50" viewBox="0 0 50 50">
-                                    <defs>
-                                        <linearGradient id="skillGradient3" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
-                                            <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
-                                        </linearGradient>
-                                    </defs>
-                                    <circle class="skill-progress-bg" cx="25" cy="25" r="20"></circle>
-                                    <circle class="skill-progress-fill" cx="25" cy="25" r="20" style="stroke: url(#skillGradient3)"></circle>
-                                </svg>
-                            </div>
-                        </div>
-                        <div class="skill-card" data-progress="80">
-                            <div class="skill-icon">🛠️</div>
-                            <h3>Engineering</h3>
-                            <p>Arduino, ESP32, CAD, 3D Printing</p>
-                            <div class="skill-progress">
-                                <svg width="50" height="50" viewBox="0 0 50 50">
-                                    <defs>
-                                        <linearGradient id="skillGradient4" x1="0%" y1="0%" x2="100%" y2="100%">
-                                            <stop offset="0%" style="stop-color:#6366f1;stop-opacity:1" />
-                                            <stop offset="100%" style="stop-color:#a78bfa;stop-opacity:1" />
-                                        </linearGradient>
-                                    </defs>
-                                    <circle class="skill-progress-bg" cx="25" cy="25" r="20"></circle>
-                                    <circle class="skill-progress-fill" cx="25" cy="25" r="20" style="stroke: url(#skillGradient4)"></circle>
-                                </svg>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <span class="skill-num">01</span>
+                        <h3>Neuroscience</h3>
+                        <p>Visual perception, attention, early visual pathways</p>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-num">02</span>
+                        <h3>Computational</h3>
+                        <p>Python, PyTorch, R, bio-constrained modeling</p>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-num">03</span>
+                        <h3>Methods</h3>
+                        <p>Eye-tracking, VR/AR, PsychoPy, psychophysics</p>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-num">04</span>
+                        <h3>Engineering</h3>
+                        <p>Arduino, ESP32, CAD, 3D printing</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="research" class="section research">
+        <section class="research" id="research">
             <div class="container">
-                <h2 class="section-title">Research Focus</h2>
-                <div class="research-grid">
-                    <div class="research-card featured">
-                        <div class="research-number">01</div>
-                        <h3>Early Visual Pathways</h3>
-                        <p>
-                            Investigating how visual information is processed in subcortical structures,
-                            particularly the lateral geniculate nucleus, superior colliculus, and pulvinar,
-                            before reaching the cortex.
-                        </p>
-                        <div class="research-abstract">
-                            My research focuses on understanding the functional architecture of early visual processing before cortical involvement. Using psychophysical methods and computational modeling, I investigate how the LGN, superior colliculus, and pulvinar contribute to visual awareness and attention. This work has implications for understanding blindsight, attentional capture, and the neural basis of consciousness.
+                <div class="section-label">02 / Research</div>
+                <h2 class="section-title">Current Focus</h2>
+
+                <div class="research-list">
+                    <article class="research-item">
+                        <div class="research-num">01</div>
+                        <div class="research-content">
+                            <h3>Inhibition of Return</h3>
+                            <p>
+                                Exploring temporal dynamics of IOR using spatial frequency manipulations
+                                to probe magnocellular and parvocellular pathway contributions.
+                            </p>
+                            <div class="research-tags">
+                                <span>Attention</span>
+                                <span>Spatial Frequency</span>
+                                <span>M/P Pathways</span>
+                            </div>
                         </div>
-                        <button class="research-expand-btn">Read more</button>
-                        <div class="research-tags">
-                            <span class="tag">LGN<span class="tag-tooltip">Lateral Geniculate Nucleus - visual relay</span></span>
-                            <span class="tag">Superior Colliculus<span class="tag-tooltip">Subcortical visual-motor structure</span></span>
-                            <span class="tag">Pulvinar<span class="tag-tooltip">Thalamic attention regulation</span></span>
+                    </article>
+
+                    <article class="research-item">
+                        <div class="research-num">02</div>
+                        <div class="research-content">
+                            <h3>Early Visual Pathways</h3>
+                            <p>
+                                Investigating sensory processing in the lateral geniculate nucleus,
+                                superior colliculus, and pulvinar—understanding how visual information
+                                is processed before cortical involvement.
+                            </p>
+                            <div class="research-tags">
+                                <span>LGN</span>
+                                <span>Superior Colliculus</span>
+                                <span>Pulvinar</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="research-card">
-                        <div class="research-number">02</div>
-                        <h3>Bio-Constrained Vision Models</h3>
-                        <p>
-                            Building computational models from scratch in PyTorch that respect biological
-                            constraints, creating more realistic simulations of human visual processing.
-                        </p>
-                        <div class="research-abstract">
-                            I develop edge-efficient vision models incorporating biological constraints like receptive field organization, center-surround antagonism, and magnocellular/parvocellular pathway distinctions. These models achieve competitive performance with fewer parameters while maintaining biological plausibility, offering insights into both neuroscience and efficient AI design.
+                    </article>
+
+                    <article class="research-item">
+                        <div class="research-num">03</div>
+                        <div class="research-content">
+                            <h3>Bio-Constrained Vision Models</h3>
+                            <p>
+                                Building edge-efficient PyTorch models incorporating biological
+                                constraints like receptive field organization and M/P pathway distinctions.
+                            </p>
+                            <div class="research-tags">
+                                <span>PyTorch</span>
+                                <span>Computer Vision</span>
+                            </div>
                         </div>
-                        <button class="research-expand-btn">Read more</button>
-                        <div class="research-tags">
-                            <span class="tag">PyTorch<span class="tag-tooltip">Deep learning framework</span></span>
-                            <span class="tag">Computer Vision<span class="tag-tooltip">Image understanding & processing</span></span>
-                            <span class="tag">Neural Networks<span class="tag-tooltip">Biologically-inspired architectures</span></span>
-                        </div>
-                    </div>
-                    <div class="research-card">
-                        <div class="research-number">03</div>
-                        <h3>Inhibition of Return</h3>
-                        <p>
-                            Exploring meta-aspects of inhibition of return (IOR), a phenomenon where attention
-                            is temporarily delayed from returning to previously attended locations.
-                        </p>
-                        <div class="research-abstract">
-                            My work investigates the temporal dynamics and spatial characteristics of IOR, examining how this mechanism shapes visual search efficiency and scene exploration. Using spatial frequency manipulations, I explore the differential roles of magnocellular and parvocellular pathways in IOR, revealing how different visual processing streams contribute to attentional inhibition mechanisms.
-                        </div>
-                        <button class="research-expand-btn">Read more</button>
-                        <div class="research-tags">
-                            <span class="tag">Attention<span class="tag-tooltip">Visual attention mechanisms</span></span>
-                            <span class="tag">IOR<span class="tag-tooltip">Inhibition of Return phenomenon</span></span>
-                            <span class="tag">Spatial Frequency<span class="tag-tooltip">Magno/Parvo pathway investigation</span></span>
-                        </div>
-                    </div>
-                    <div class="research-card">
-                        <div class="research-number">04</div>
-                        <h3>Neurodiversity & VR</h3>
-                        <p>
-                            Previous work developing VR technologies for neurodiverse learners—by us, for us.
-                            As a neurodivergent researcher, I studied bistable perception in neurodivergent populations
-                            in collaboration with Dartmouth College.
-                        </p>
-                        <div class="research-abstract">
-                            Through participatory co-design with neurodiverse learners, I developed inclusive VR learning environments for STEM education. As a neurodivergent researcher myself, this work represents authentic community-driven research. I also contributed to a collaborative study between Dartmouth College and Landmark College examining differences in bistable perception across neurodivergent populations, revealing insights into perceptual stability and individual differences in visual processing that challenge neurotypical assumptions about perception.
-                        </div>
-                        <button class="research-expand-btn">Read more</button>
-                        <div class="research-tags">
-                            <span class="tag">Virtual Reality<span class="tag-tooltip">Immersive learning environments</span></span>
-                            <span class="tag">Neurodiversity<span class="tag-tooltip">Inclusive design research</span></span>
-                            <span class="tag">STEM Education<span class="tag-tooltip">Science & technology learning</span></span>
-                        </div>
-                    </div>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <section id="education" class="section education">
+        <section class="timeline" id="journey">
             <div class="container">
+                <div class="section-label">03 / Journey</div>
                 <h2 class="section-title">Education</h2>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-marker current"></div>
-                        <div class="timeline-content">
-                            <span class="timeline-date">2024 — Present</span>
-                            <h3>Doctor of Philosophy in Psychology</h3>
-                            <p class="institution">University of Toronto</p>
-                            <p>Visual Cognition Lab • Supervisor: Dr. Jay Pratt</p>
+
+                <div class="timeline-layout">
+                    <div class="timeline-items">
+                        <div class="timeline-item active" data-school="toronto">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2024 — Present</span>
+                                <h3>PhD in Psychology</h3>
+                                <p>University of Toronto • Visual Cognition Lab</p>
+                                <p class="timeline-detail">Supervisor: Dr. Jay Pratt</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item" data-school="oregon">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2021 — 2023</span>
+                                <h3>MSc in Psychology</h3>
+                                <p>University of Oregon • Action & Perception Lab</p>
+                                <p class="timeline-detail">Supervisor: Dr. Paul Dassonville</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item" data-school="landmark">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <span class="timeline-date">2018 — 2019</span>
+                                <h3>BA in Psychology</h3>
+                                <p>Landmark College • Summa Cum Laude</p>
+                                <p class="timeline-detail">Founding member, Cognitive Neuroscience Lab</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <span class="timeline-date">2021 — 2023</span>
-                            <h3>Master of Science in Psychology</h3>
-                            <p class="institution">University of Oregon</p>
-                            <p>Action and Perception Lab • Supervisor: Dr. Paul Dassonville</p>
+                    <div class="timeline-visual">
+                        <div class="school-logo" data-active="toronto">
+                            <img src="UofT_Logo.svg_-e1418677958967.png" alt="University of Toronto" class="logo-toronto active">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/University_of_Oregon_logo.svg" alt="University of Oregon" class="logo-oregon">
+                            <img src="https://d36hg9qb9mfx26.cloudfront.net/logos/logo-vertical.png" alt="Landmark College" class="logo-landmark">
                         </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <span class="timeline-date">2018 — 2019</span>
-                            <h3>Bachelor of Arts in Psychology</h3>
-                            <p class="institution">Landmark College</p>
-                            <p>Summa Cum Laude</p>
-                            <p class="achievement">Founding member of the cognitive neuroscience lab</p>
-                        </div>
+                        <div class="school-name">University of Toronto</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="publications" class="section publications">
+        <section class="work" id="work">
             <div class="container">
-                <h2 class="section-title">Publications & Presentations</h2>
-                <div class="publication-list">
-                    <article class="publication-item">
-                        <div class="publication-year">2024</div>
-                        <div class="publication-content">
-                            <div class="publication-header">
-                                <h3>Does Inhibition of Return Care About Spatial Frequency?</h3>
-                                <span class="conference-badge poster">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M3 3h18v18H3V3z"/>
-                                        <path d="M7 7h10M7 12h10M7 17h6"/>
-                                    </svg>
-                                    Poster
-                                </span>
-                            </div>
-                            <p class="publication-venue">Vision Sciences Society (VSS) Annual Meeting 2024</p>
-                            <p class="publication-description">
-                                Investigating whether inhibition of return mechanisms are sensitive to spatial frequency
-                                variations, examining the interplay between attentional processes and early visual
-                                feature processing in the retinotectal pathway.
-                            </p>
-                            <a href="https://www.researchgate.net/publication/393728840_Does_Inhibition_of_Return_Care_About_Spatial_Frequency"
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               class="publication-link">
-                                View on ResearchGate →
+                <div class="section-label">04 / Publications</div>
+                <h2 class="section-title">Selected Work</h2>
+
+                <div class="pub-list">
+                    <article class="pub-item">
+                        <span class="pub-year">2024</span>
+                        <div class="pub-content">
+                            <h3>Does Inhibition of Return Care About Spatial Frequency?</h3>
+                            <p class="pub-venue">Vision Sciences Society (VSS) 2024</p>
+                            <a href="https://www.researchgate.net/publication/393728840" target="_blank" class="pub-link">
+                                View Publication →
                             </a>
                         </div>
                     </article>
-                    <article class="publication-item">
-                        <div class="publication-year">2023</div>
-                        <div class="publication-content">
-                            <div class="publication-header">
-                                <h3>Dissecting the Reaction Times of Global and Local Processing</h3>
-                                <span class="conference-badge poster">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M3 3h18v18H3V3z"/>
-                                        <path d="M7 7h10M7 12h10M7 17h6"/>
-                                    </svg>
-                                    Poster
-                                </span>
-                            </div>
-                            <p class="publication-venue">Vision Sciences Society (VSS) Annual Meeting 2023</p>
-                            <p class="publication-description">
-                                Analyzing the temporal dynamics of hierarchical visual processing by decomposing
-                                reaction time distributions in global-local perception tasks, revealing insights into
-                                the time course of visual information integration.
-                            </p>
-                            <a href="https://www.researchgate.net/publication/381514467_Dissecting_the_Reaction_Times_of_Global_and_Local_Processing"
-                               target="_blank"
-                               rel="noopener noreferrer"
-                               class="publication-link">
-                                View on ResearchGate →
+
+                    <article class="pub-item">
+                        <span class="pub-year">2023</span>
+                        <div class="pub-content">
+                            <h3>Dissecting the Reaction Times of Global and Local Processing</h3>
+                            <p class="pub-venue">Vision Sciences Society (VSS) 2023</p>
+                            <a href="https://www.researchgate.net/publication/381514467" target="_blank" class="pub-link">
+                                View Publication →
                             </a>
                         </div>
                     </article>
-                    <article class="publication-item">
-                        <div class="publication-year">2021</div>
-                        <div class="publication-content">
-                            <div class="publication-header">
-                                <h3>Inclusive VR through Inclusive Co-Design with Neurodiverse Learners</h3>
-                                <span class="conference-badge">
-                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2z"/>
-                                    </svg>
-                                    Conference
-                                </span>
-                            </div>
-                            <p class="publication-venue">7th International Conference of the Immersive Learning Research
-                                Network (iLRN)</p>
-                            <p class="publication-description">
-                                Research exploring how virtual reality can be designed inclusively with and for
-                                neurodiverse learners, applying co-design methodologies to create more accessible
-                                immersive learning experiences.
-                            </p>
+
+                    <article class="pub-item">
+                        <span class="pub-year">2021</span>
+                        <div class="pub-content">
+                            <h3>Inclusive VR through Co-Design with Neurodiverse Learners</h3>
+                            <p class="pub-venue">iLRN Conference 2021</p>
                         </div>
                     </article>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="section contact">
+        <section class="contact" id="contact">
             <div class="container">
-                <h2 class="section-title">Get in Touch</h2>
-                <div class="contact-content">
-                    <p class="contact-lead">
-                        I'm always interested in discussing visual cognition research, potential collaborations,
-                        or just connecting with fellow researchers and curious minds.
-                    </p>
+                <div class="contact-layout">
+                    <div class="contact-text">
+                        <div class="section-label">05 / Contact</div>
+                        <h2 class="section-title">Let's connect</h2>
+                        <p>
+                            Interested in visual cognition, potential collaborations,
+                            or just want to chat about the brain?
+                        </p>
+                        <a href="mailto:d.lougen@mail.utoronto.ca" class="contact-email">
+                            d.lougen@mail.utoronto.ca
+                        </a>
+                    </div>
                     <div class="contact-links">
-                        <a href="https://www.linkedin.com/in/djlougen/" target="_blank" rel="noopener noreferrer"
-                            class="contact-card">
-                            <div class="contact-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="currentColor">
-                                    <path
-                                        d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
-                                </svg>
-                            </div>
-                            <span>LinkedIn</span>
-                        </a>
-                        <a href="mailto:d.lougen@mail.utoronto.ca" class="contact-card">
-                            <div class="contact-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <rect width="20" height="16" x="2" y="4" rx="2" />
-                                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                                </svg>
-                            </div>
-                            <span>Email</span>
-                        </a>
-                        <a href="https://www.psych.utoronto.ca/" target="_blank" rel="noopener noreferrer"
-                            class="contact-card">
-                            <div class="contact-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round">
-                                    <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                                    <path d="M6 12v5c3 3 9 3 12 0v-5" />
-                                </svg>
-                            </div>
-                            <span>Department</span>
-                        </a>
-                        <a href="https://github.com/DJLougen" target="_blank" rel="noopener noreferrer"
-                            class="contact-card">
-                            <div class="contact-icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                    fill="currentColor">
-                                    <path
-                                        d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                                </svg>
-                            </div>
-                            <span>GitHub</span>
-                        </a>
-                        <a href="https://huggingface.co/DJLougen" target="_blank" rel="noopener noreferrer"
-                            class="contact-card">
-                            <div class="contact-icon">
-                                <img src="huggingface(1).svg" alt="Hugging Face" width="24" height="24">
-                            </div>
-                            <span>Hugging Face</span>
-                        </a>
+                        <a href="https://www.linkedin.com/in/djlougen/" target="_blank">LinkedIn</a>
+                        <a href="https://github.com/DJLougen" target="_blank">GitHub</a>
+                        <a href="https://huggingface.co/DJLougen" target="_blank">Hugging Face</a>
+                        <a href="https://pratt.psych.utoronto.ca/visual-cognition-lab/" target="_blank">Lab Website</a>
                     </div>
                 </div>
             </div>
@@ -479,7 +284,8 @@
 
     <footer class="footer">
         <div class="container">
-            <p>© 2024 Daniel Lougen. Built with curiosity about the visual world.</p>
+            <p>© 2024 Daniel Lougen</p>
+            <p class="footer-note">Studying how you see this.</p>
         </div>
     </footer>
 

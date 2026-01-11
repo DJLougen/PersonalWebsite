@@ -1,31 +1,277 @@
-// ===== DOM Elements =====
-const navbar = document.querySelector('.navbar');
+// ===== Cursor Glow Effect =====
+const cursorGlow = document.querySelector('.cursor-glow');
+let mouseX = 0, mouseY = 0;
+let glowX = 0, glowY = 0;
+
+document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+});
+
+function animateCursor() {
+    glowX += (mouseX - glowX) * 0.1;
+    glowY += (mouseY - glowY) * 0.1;
+
+    if (cursorGlow) {
+        cursorGlow.style.left = glowX + 'px';
+        cursorGlow.style.top = glowY + 'px';
+    }
+
+    requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+// ===== Organic Fractal Trees =====
+class FractalTree {
+    constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.trees = [];
+        this.maxTrees = 10;
+        this.resize();
+
+        window.addEventListener('resize', () => this.resize());
+
+        // Spawn initial trees from different edges
+        for (let i = 0; i < 4; i++) {
+            setTimeout(() => this.spawnTree(), i * 400);
+        }
+    }
+
+    resize() {
+        this.canvas.width = this.canvas.offsetWidth;
+        this.canvas.height = this.canvas.offsetHeight;
+    }
+
+    spawnTree() {
+        if (this.trees.length >= this.maxTrees) return;
+
+        const edge = Math.random();
+        let x, y, angle;
+        const centerX = this.canvas.width / 2;
+
+        if (edge < 0.3) {
+            // Bottom - grow up, angle away from center
+            x = Math.random() * this.canvas.width;
+            y = this.canvas.height + 5;
+            // Angle outward: left side angles left, right side angles right
+            const offsetFromCenter = (x - centerX) / centerX; // -1 to 1
+            angle = -Math.PI / 2 + offsetFromCenter * 0.5 + (Math.random() - 0.5) * 0.2;
+        } else if (edge < 0.5) {
+            // Left - grow right
+            x = -5;
+            y = this.canvas.height * (0.15 + Math.random() * 0.7);
+            angle = (Math.random() - 0.5) * 0.4;
+        } else if (edge < 0.7) {
+            // Right - grow left
+            x = this.canvas.width + 5;
+            y = this.canvas.height * (0.15 + Math.random() * 0.7);
+            angle = Math.PI + (Math.random() - 0.5) * 0.4;
+        } else if (edge < 0.85) {
+            // Top - grow down, angle away from center
+            x = Math.random() * this.canvas.width;
+            y = -5;
+            const offsetFromCenter = (x - centerX) / centerX;
+            angle = Math.PI / 2 + offsetFromCenter * 0.5 + (Math.random() - 0.5) * 0.2;
+        } else {
+            // Corners
+            const corner = Math.floor(Math.random() * 4);
+            if (corner === 0) { x = -5; y = -5; angle = Math.PI / 4; }
+            else if (corner === 1) { x = this.canvas.width + 5; y = -5; angle = 3 * Math.PI / 4; }
+            else if (corner === 2) { x = -5; y = this.canvas.height + 5; angle = -Math.PI / 4; }
+            else { x = this.canvas.width + 5; y = this.canvas.height + 5; angle = -3 * Math.PI / 4; }
+            angle += (Math.random() - 0.5) * 0.2;
+        }
+
+        this.trees.push({
+            x: x,
+            y: y,
+            angle: angle,
+            curve: (Math.random() - 0.5) * 0.008,
+            length: 0,
+            targetLength: 100 + Math.random() * 80,
+            thickness: 3.5 + Math.random() * 2,
+            depth: 0,
+            children: [],
+            opacity: 0,
+            growing: true,
+            life: 1,
+            fadeSpeed: 0.0003 + Math.random() * 0.00015
+        });
+    }
+
+    growBranch(branch) {
+        if (branch.growing) {
+            // Grow with slight curve
+            branch.length += branch.depth === 0 ? 1.4 : 1.1;
+            branch.angle += branch.curve || 0;
+            branch.opacity = Math.min(branch.opacity + 0.018, 0.75);
+
+            if (branch.length >= branch.targetLength) {
+                branch.growing = false;
+
+                // Branch out like a tree - spiky style
+                if (branch.depth < 6 && Math.random() > 0.08) {
+                    // More children for spikier look
+                    const numChildren = branch.depth < 2 ? 3 : (Math.random() > 0.3 ? 3 : 2);
+
+                    for (let i = 0; i < numChildren; i++) {
+                        // Sharper, spikier angles
+                        const spreadBase = 0.4 + branch.depth * 0.08;
+                        const spread = spreadBase + Math.random() * 0.35;
+                        const direction = i === 0 ? -1 : (i === 1 ? 0 : 1);
+
+                        const endX = branch.x + Math.cos(branch.angle) * branch.length;
+                        const endY = branch.y + Math.sin(branch.angle) * branch.length;
+
+                        branch.children.push({
+                            x: endX,
+                            y: endY,
+                            angle: branch.angle + direction * spread,
+                            curve: (Math.random() - 0.5) * 0.015,
+                            length: 0,
+                            targetLength: branch.targetLength * (0.65 + Math.random() * 0.15),
+                            thickness: Math.max(0.4, branch.thickness * 0.8), // More gradual taper
+                            depth: branch.depth + 1,
+                            children: [],
+                            opacity: 0,
+                            growing: true
+                        });
+                    }
+                }
+            }
+        }
+
+        // Always grow children (this was the bug - it was inside the if block)
+        branch.children.forEach(child => this.growBranch(child));
+    }
+
+    drawBranch(branch, globalOpacity) {
+        if (branch.length <= 0) return;
+
+        const endX = branch.x + Math.cos(branch.angle) * branch.length;
+        const endY = branch.y + Math.sin(branch.angle) * branch.length;
+        const alpha = branch.opacity * globalOpacity;
+
+        // Glow for main branches
+        if (branch.thickness > 1.2) {
+            this.ctx.beginPath();
+            this.ctx.moveTo(branch.x, branch.y);
+            this.ctx.lineTo(endX, endY);
+            this.ctx.strokeStyle = `rgba(212, 168, 83, ${alpha * 0.25})`;
+            this.ctx.lineWidth = branch.thickness + 5;
+            this.ctx.lineCap = 'round';
+            this.ctx.stroke();
+        }
+
+        // Main branch
+        this.ctx.beginPath();
+        this.ctx.moveTo(branch.x, branch.y);
+        this.ctx.lineTo(endX, endY);
+        this.ctx.strokeStyle = `rgba(212, 168, 83, ${alpha})`;
+        this.ctx.lineWidth = branch.thickness;
+        this.ctx.lineCap = 'round';
+        this.ctx.stroke();
+
+        branch.children.forEach(child => this.drawBranch(child, globalOpacity));
+    }
+
+    animate() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        if (Math.random() < 0.02) {
+            this.spawnTree();
+        }
+
+        this.trees = this.trees.filter(tree => {
+            this.growBranch(tree);
+            const stillGrowing = this.isAnyGrowing(tree);
+            if (!stillGrowing) tree.life -= tree.fadeSpeed;
+            this.drawBranch(tree, tree.life);
+            return tree.life > 0;
+        });
+
+        requestAnimationFrame(() => this.animate());
+    }
+
+    isAnyGrowing(branch) {
+        if (branch.growing) return true;
+        return branch.children.some(child => this.isAnyGrowing(child));
+    }
+}
+
+const perceptionCanvas = document.getElementById('perception-field');
+if (perceptionCanvas) {
+    const tree = new FractalTree(perceptionCanvas);
+    tree.animate();
+}
+
+// ===== Eye Pupil Tracking =====
+const eyePupil = document.querySelector('.eye-pupil');
+const heroVisual = document.querySelector('.hero-visual');
+
+if (eyePupil && heroVisual) {
+    document.addEventListener('mousemove', (e) => {
+        const rect = heroVisual.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        const dx = e.clientX - centerX;
+        const dy = e.clientY - centerY;
+        const angle = Math.atan2(dy, dx);
+        const distance = Math.min(Math.sqrt(dx * dx + dy * dy), 150);
+        const maxMove = 18;
+
+        const moveX = (distance / 150) * maxMove * Math.cos(angle);
+        const moveY = (distance / 150) * maxMove * Math.sin(angle);
+
+        eyePupil.style.transform = `translate(calc(-50% + ${moveX}px), calc(-50% + ${moveY}px))`;
+    });
+}
+
+// ===== Navigation =====
+const nav = document.querySelector('.nav');
 const navToggle = document.querySelector('.nav-toggle');
 const navLinks = document.querySelector('.nav-links');
 
-// ===== Mobile Navigation Toggle =====
-navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    navToggle.classList.toggle('active');
+// Scroll state
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+    const currentScroll = window.scrollY;
+
+    if (currentScroll > 100) {
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
+
+    lastScroll = currentScroll;
 });
 
-// Close mobile nav when clicking a link
-navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        navToggle.classList.remove('active');
+// Mobile toggle
+if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
     });
-});
 
-// ===== Smooth Scroll for Navigation =====
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            navToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+}
+
+// ===== Smooth Scroll =====
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    anchor.addEventListener('click', function(e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
             const headerOffset = 80;
             const elementPosition = target.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            const offsetPosition = elementPosition + window.scrollY - headerOffset;
 
             window.scrollTo({
                 top: offsetPosition,
@@ -35,7 +281,33 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// ===== Intersection Observer for Animations =====
+// ===== Active Nav Highlighting =====
+const sections = document.querySelectorAll('section[id]');
+const navItems = document.querySelectorAll('.nav-links a');
+
+function updateActiveNav() {
+    const scrollY = window.scrollY;
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop - 150;
+        const sectionHeight = section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+
+        if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${sectionId}`) {
+                    item.classList.add('active');
+                }
+            });
+        }
+    });
+}
+
+window.addEventListener('scroll', updateActiveNav);
+updateActiveNav();
+
+// ===== Scroll Reveal Animations =====
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -44,400 +316,112 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            const velocity = Math.abs(scrollVelocity);
-            const scrollDirection = scrollVelocity > 0 ? 'down' : 'up';
-
-            // Apply different animations based on velocity and direction
-            if (velocity > 5) {
-                entry.target.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-            } else {
-                entry.target.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            }
-
-            if (scrollDirection === 'down') {
-                entry.target.style.transform = 'translateY(0)';
-            } else {
-                entry.target.style.transform = 'translateY(0) scale(1.02)';
-            }
-
-            entry.target.classList.add('visible');
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-// Observe elements for animation
-document.querySelectorAll('.skill-card, .research-card, .timeline-item, .publication-item, .contact-card').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(30px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+document.querySelectorAll('.section-label, .section-title, .about-text, .skill-item, .research-item, .timeline-item, .pub-item, .contact-text, .contact-links').forEach(el => {
+    el.classList.add('reveal');
     observer.observe(el);
 });
 
-// Add visible class styles
-const style = document.createElement('style');
-style.textContent = `
-    .skill-card.visible,
-    .research-card.visible,
-    .timeline-item.visible,
-    .publication-item.visible,
-    .contact-card.visible {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-    }
-`;
-document.head.appendChild(style);
-
-// ===== Staggered Animation for Cards =====
+// ===== Staggered Card Animations =====
 const staggerObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            const cards = entry.target.querySelectorAll('.skill-card, .research-card, .contact-card');
-            cards.forEach((card, index) => {
+            const cards = entry.target.querySelectorAll('.skill-item, .research-item');
+            cards.forEach((card, i) => {
                 setTimeout(() => {
-                    card.classList.add('visible');
-                }, index * 100);
+                    card.classList.add('revealed');
+                }, i * 100);
             });
+            staggerObserver.unobserve(entry.target);
         }
     });
-}, { threshold: 0.1 });
+}, { threshold: 0.15 });
 
-document.querySelectorAll('.skills-grid, .research-grid, .contact-links').forEach(grid => {
+document.querySelectorAll('.skills-grid, .research-list').forEach(grid => {
     staggerObserver.observe(grid);
 });
 
-// ===== Mouse Tracking for Research Cards =====
-document.querySelectorAll('.research-card').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        card.style.setProperty('--mouse-x', `${x}%`);
-        card.style.setProperty('--mouse-y', `${y}%`);
-    });
-});
-
-// ===== Combined Scroll Handler =====
-let lastScroll = 0;
-let lastScrollY = 0;
-let scrollVelocity = 0;
-let ticking = false;
-
-const sections = document.querySelectorAll('section[id]');
-const navItems = document.querySelectorAll('.nav-links a');
-
-function handleScroll() {
-    const currentScroll = window.pageYOffset;
-
-    // Calculate scroll velocity
-    scrollVelocity = currentScroll - lastScrollY;
-    lastScrollY = currentScroll;
-
-    // Navbar background on scroll
-    if (currentScroll > 50) {
-        navbar.style.background = 'rgba(10, 10, 15, 0.95)';
-        navbar.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.3)';
-    } else {
-        navbar.style.background = 'rgba(10, 10, 15, 0.8)';
-        navbar.style.boxShadow = 'none';
-    }
-
-    // Active nav link highlighting
-    let current = '';
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        if (currentScroll >= sectionTop - 200) {
-            current = section.getAttribute('id');
-        }
-    });
-
-    navItems.forEach(item => {
-        item.classList.remove('active');
-        if (item.getAttribute('href') === `#${current}`) {
-            item.classList.add('active');
-        }
-    });
-
-    // Neural network scroll response
-    const neuronRings = document.querySelectorAll('.neuron-ring');
-    const synapses = document.querySelectorAll('.synapse');
-    neuronRings.forEach((ring, index) => {
-        ring.style.animationDuration = `${30 - (index * 5)}s`;
-    });
-    if (Math.abs(scrollVelocity) > 2) {
-        synapses.forEach(synapse => {
-            synapse.style.opacity = '1';
-        });
-    }
-
-    // Neural network scaling effect
-    const hero = document.querySelector('.hero');
-    if (hero) {
-        const heroRect = hero.getBoundingClientRect();
-        const heroVisible = heroRect.bottom > 0;
-
-        if (heroVisible) {
-            const scrollProgress = 1 - (heroRect.bottom / window.innerHeight);
-            const neuronCore = document.querySelector('.neuron-core');
-            const rings = document.querySelectorAll('.neuron-ring');
-
-            if (neuronCore && scrollProgress >= 0) {
-                const scale = 1 + (scrollProgress * 0.3);
-                neuronCore.style.transform = `translate(-50%, -50%) scale(${scale})`;
-                rings.forEach((ring) => {
-                    const opacity = 1 - (scrollProgress * 0.5);
-                    ring.style.opacity = Math.max(0.2, opacity);
-                });
-            }
-        }
-    }
-
-    lastScroll = currentScroll;
-    ticking = false;
-}
-
-window.addEventListener('scroll', () => {
-    if (!ticking) {
-        window.requestAnimationFrame(handleScroll);
-        ticking = true;
-    }
-});
-
-// Add active link style
-const navStyle = document.createElement('style');
-navStyle.textContent = `
-    .nav-links a.active {
-        color: var(--color-text);
-    }
-    .nav-links a.active::after {
-        width: 100%;
-    }
-`;
-document.head.appendChild(navStyle);
-
-// ===== Parallax Effect for Gradient Orbs =====
-let mouseX = 0;
-let mouseY = 0;
-let orbX = 0;
-let orbY = 0;
-
-document.addEventListener('mousemove', (e) => {
-    mouseX = (e.clientX / window.innerWidth - 0.5) * 40;
-    mouseY = (e.clientY / window.innerHeight - 0.5) * 40;
-});
-
-function animateOrbs() {
-    // Smooth lerping for organic movement
-    orbX += (mouseX - orbX) * 0.05;
-    orbY += (mouseY - orbY) * 0.05;
-
-    const orbs = document.querySelectorAll('.gradient-orb');
-    orbs.forEach((orb, index) => {
-        const factor = index === 0 ? 1 : -1;
-        orb.style.transform = `translate(${orbX * factor}px, ${orbY * factor}px)`;
-    });
-
-    requestAnimationFrame(animateOrbs);
-}
-animateOrbs();
-
-// ===== Neural Visualization Enhancement =====
-const neuronCore = document.querySelector('.neuron-core');
-if (neuronCore) {
-    document.addEventListener('mousemove', (e) => {
-        const hero = document.querySelector('.hero');
-        if (hero) {
-            const rect = hero.getBoundingClientRect();
-            if (e.clientY < rect.bottom) {
-                const x = (e.clientX / window.innerWidth - 0.5) * 10;
-                const y = (e.clientY / window.innerHeight - 0.5) * 10;
-                neuronCore.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
-            }
-        }
-    });
-}
-
-// ===== Particle System =====
-const canvas = document.getElementById('particle-canvas');
-if (canvas) {
-    const ctx = canvas.getContext('2d');
-    let particles = [];
-    const particleCount = 50;
-    const connectionDistance = 100;
-
-    // Set canvas size
-    function resizeCanvas() {
-        canvas.width = 500;
-        canvas.height = 500;
-    }
-    resizeCanvas();
-
-    // Particle class
-    class Particle {
-        constructor() {
-            this.x = Math.random() * canvas.width;
-            this.y = Math.random() * canvas.height;
-            this.vx = (Math.random() - 0.5) * 0.5;
-            this.vy = (Math.random() - 0.5) * 0.5;
-            this.radius = Math.random() * 2 + 1;
-            this.opacity = Math.random() * 0.5 + 0.2;
-            this.hue = Math.random() * 60 + 240; // Purple to blue range
-        }
-
-        update() {
-            this.x += this.vx;
-            this.y += this.vy;
-
-            // Bounce off edges
-            if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-            if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-
-            // Keep within bounds
-            this.x = Math.max(0, Math.min(canvas.width, this.x));
-            this.y = Math.max(0, Math.min(canvas.height, this.y));
-        }
-
-        draw() {
-            ctx.beginPath();
-            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-            ctx.fillStyle = `hsla(${this.hue}, 70%, 60%, ${this.opacity})`;
-            ctx.fill();
-
-            // Add glow
-            ctx.shadowBlur = 10;
-            ctx.shadowColor = `hsla(${this.hue}, 70%, 60%, 0.5)`;
-            ctx.fill();
-            ctx.shadowBlur = 0;
-        }
-    }
-
-    // Initialize particles
-    function initParticles() {
-        particles = [];
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-    }
-
-    // Draw connections between close particles
-    function drawConnections() {
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < connectionDistance) {
-                    const opacity = (1 - distance / connectionDistance) * 0.3;
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.strokeStyle = `rgba(99, 102, 241, ${opacity})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.stroke();
-                }
-            }
-        }
-    }
-
-    // Animation loop
-    function animateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        drawConnections();
-
-        particles.forEach(particle => {
-            particle.update();
-            particle.draw();
-        });
-
-        requestAnimationFrame(animateParticles);
-    }
-
-    initParticles();
-    animateParticles();
-}
-
-// ===== Page Load Animation =====
-window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    document.body.style.transition = 'opacity 0.5s ease';
-
-    setTimeout(() => {
-        document.body.style.opacity = '1';
-    }, 100);
-});
-
-// ===== Skill Progress Rings Animation =====
-function animateSkillProgress() {
-    const skillCards = document.querySelectorAll('.skill-card[data-progress]');
-    const radius = 20;
-    const circumference = 2 * Math.PI * radius;
-
-    skillCards.forEach(card => {
-        const progress = parseInt(card.getAttribute('data-progress'));
-        const offset = circumference - (progress / 100) * circumference;
-        card.style.setProperty('--progress-offset', offset);
-    });
-}
-
-// Initialize skill progress on load
-animateSkillProgress();
-
-// ===== Research Card Expansion =====
-document.querySelectorAll('.research-expand-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const card = btn.closest('.research-card');
-        card.classList.toggle('expanded');
-        btn.textContent = card.classList.contains('expanded') ? 'Show less' : 'Read more';
-    });
-});
-
-// ===== Animated Timeline Progress =====
+// ===== Timeline Animation =====
+const timelineItems = document.querySelectorAll('.timeline-item');
 const timelineObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            const timeline = entry.target;
-            timeline.classList.add('animated');
-
-            // Animate markers sequentially
-            const items = timeline.querySelectorAll('.timeline-item');
-            items.forEach((item, index) => {
-                setTimeout(() => {
-                    item.classList.add('reached');
-                }, index * 200);
-            });
+            entry.target.classList.add('revealed');
+            timelineObserver.unobserve(entry.target);
         }
     });
-}, { threshold: 0.2 });
+}, { threshold: 0.3 });
 
-const timeline = document.querySelector('.timeline');
-if (timeline) {
-    timelineObserver.observe(timeline);
-}
-
-// ===== 3D Publication Card Transforms =====
-document.querySelectorAll('.publication-item').forEach(card => {
-    card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-
-        // Calculate rotation angles (limited to ±5 degrees for subtle effect)
-        const rotateX = ((y - centerY) / centerY) * -5;
-        const rotateY = ((x - centerX) / centerX) * 5;
-
-        card.style.setProperty('--mouse-x-rotation', `${rotateY}deg`);
-        card.style.setProperty('--mouse-y-rotation', `${rotateX}deg`);
-    });
-
-    card.addEventListener('mouseleave', () => {
-        card.style.setProperty('--mouse-x-rotation', '0deg');
-        card.style.setProperty('--mouse-y-rotation', '0deg');
-    });
+timelineItems.forEach((item, i) => {
+    item.style.transitionDelay = `${i * 0.15}s`;
+    timelineObserver.observe(item);
 });
 
-console.log('✨ Personal website loaded successfully with enhanced interactions');
+// ===== School Logo Hover =====
+const schoolNames = {
+    toronto: 'University of Toronto',
+    oregon: 'University of Oregon',
+    landmark: 'Landmark College'
+};
+
+const timelineItemsForLogo = document.querySelectorAll('.timeline-item[data-school]');
+const schoolLogos = document.querySelectorAll('.school-logo img');
+const schoolNameEl = document.querySelector('.school-name');
+
+if (timelineItemsForLogo.length && schoolLogos.length) {
+    timelineItemsForLogo.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+            const school = item.dataset.school;
+
+            // Update active logo
+            schoolLogos.forEach(logo => {
+                logo.classList.remove('active');
+                if (logo.classList.contains(`logo-${school}`)) {
+                    logo.classList.add('active');
+                }
+            });
+
+            // Update school name
+            if (schoolNameEl) {
+                schoolNameEl.textContent = schoolNames[school];
+            }
+        });
+    });
+}
+
+// ===== Hide Scroll Indicator =====
+const scrollIndicator = document.querySelector('.hero-scroll');
+if (scrollIndicator) {
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 100) {
+            scrollIndicator.style.opacity = '0';
+        } else {
+            scrollIndicator.style.opacity = '1';
+        }
+    });
+}
+
+// ===== Reduced Motion =====
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+if (prefersReducedMotion.matches) {
+    document.querySelectorAll('.reveal').forEach(el => {
+        el.classList.add('revealed');
+    });
+
+    if (cursorGlow) {
+        cursorGlow.style.display = 'none';
+    }
+}
+
+// ===== Page Load =====
+window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+});
+
+console.log('Visual Cognition - Perception Interface Loaded');
