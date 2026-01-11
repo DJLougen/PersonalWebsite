@@ -1,7 +1,12 @@
 {
   "permissions": {
     "allow": [
-      "Skill(frontend-design)"
+      "Skill(frontend-design)",
+      "Bash(git -C \"C:\\\\Users\\\\basbe\\\\Documents\\\\GitHub\\\\PersonalWebsite\" show HEAD:index.html)",
+      "Bash(git -C \"C:\\\\Users\\\\basbe\\\\Documents\\\\GitHub\\\\PersonalWebsite\" log --oneline -3 --stat)",
+      "Bash(git -C \"C:\\\\Users\\\\basbe\\\\Documents\\\\GitHub\\\\PersonalWebsite\" diff HEAD -- index.html styles.css script.js)",
+      "Bash(git -C \"C:\\\\Users\\\\basbe\\\\Documents\\\\GitHub\\\\PersonalWebsite\" fetch origin)",
+      "Bash(git -C \"C:\\\\Users\\\\basbe\\\\Documents\\\\GitHub\\\\PersonalWebsite\" log origin/main --oneline -3)"
     ]
   }
 }
