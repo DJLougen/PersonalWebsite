@@ -84,12 +84,12 @@ body:hover .cursor-glow {
 /* ===== Click Hint ===== */
 .click-hint {
     position: fixed;
-    left: 130px;
+    left: 140px;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 0;
     z-index: 15;
     opacity: 0;
     pointer-events: none;
@@ -98,46 +98,45 @@ body:hover .cursor-glow {
 
 .click-hint.show {
     opacity: 1;
-    animation: hintFloat 2.5s ease-in-out infinite;
 }
 
 .hint-arrow {
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     color: var(--accent);
-    animation: hintBounce 1s ease-in-out infinite;
-    text-shadow: 0 0 20px rgba(212, 168, 83, 0.6);
+    animation: hintPoint 1.2s ease-in-out infinite;
+    text-shadow: 0 0 20px rgba(212, 168, 83, 0.8);
+    line-height: 1;
+    /* Point directly at the first icon */
+    margin-right: -6px;
 }
 
 .hint-text {
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    background: rgba(15, 15, 17, 0.85);
-    border: 1px solid var(--border);
+    gap: 1px;
+    background: rgba(15, 15, 17, 0.9);
+    border: 1px solid var(--accent);
     border-radius: 8px;
     padding: 10px 14px;
     backdrop-filter: blur(10px);
+    box-shadow: 0 0 16px rgba(212, 168, 83, 0.15), 0 4px 20px rgba(0,0,0,0.4);
 }
 
 .hint-text strong {
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     color: var(--text);
     font-family: var(--font-mono);
 }
 
 .hint-text span {
-    font-size: 0.7rem;
-    color: var(--text-muted);
+    font-size: 0.68rem;
+    color: var(--accent);
+    font-family: var(--font-mono);
 }
 
-@keyframes hintBounce {
-    0%, 100% { transform: translateX(0); }
-    50% { transform: translateX(-8px); }
-}
-
-@keyframes hintFloat {
-    0%, 100% { transform: translateY(-50%); }
-    50% { transform: translateY(calc(-50% - 6px)); }
+@keyframes hintPoint {
+    0%, 100% { transform: translateX(0); opacity: 1; }
+    50% { transform: translateX(-10px); opacity: 0.6; }
 }
 
 /* ===== Desktop Icons ===== */
