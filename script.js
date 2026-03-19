@@ -532,11 +532,10 @@ class PhysicsCards {
         };
 
         const cardDefs = [
-            { id: 'ior', title: 'IOR Study', svg: cardSvgPaths.ior, window: 'research' },
-            { id: 'lgn', title: 'LGN Study', svg: cardSvgPaths.lgn, window: 'research' },
-            { id: 'bio', title: 'Bio Model', svg: cardSvgPaths.bio, window: 'research' },
-            { id: 'eye', title: 'Eye Track', svg: cardSvgPaths.eye, window: 'journey' },
-            { id: 'vss', title: 'VSS 2024', svg: cardSvgPaths.vss, window: 'publications' }
+            { id: 'ior', title: 'Interests', svg: cardSvgPaths.ior, window: 'research' },
+            { id: 'bio', title: 'MPKnet', svg: cardSvgPaths.bio, window: 'research' },
+            { id: 'eye', title: 'Education Track', svg: cardSvgPaths.eye, window: 'journey' },
+            { id: 'vss', title: 'Posters and Publications', svg: cardSvgPaths.vss, window: 'publications' }
         ];
 
         if (!this.container) return;
