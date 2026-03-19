@@ -15,254 +15,312 @@
 <body>
     <div class="cursor-glow"></div>
 
-    <nav class="nav">
-        <a href="#" class="nav-logo">DL<span class="blink">_</span></a>
-        <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#research">Research</a>
-            <a href="#work">Work</a>
-            <a href="#contact">Contact</a>
+    <!-- Desktop Background with Fractal Trees -->
+    <canvas id="desktop-canvas"></canvas>
+
+    <div class="click-hint" id="click-hint">
+        <div class="hint-arrow">←</div>
+        <div class="hint-text">
+            <strong>Click an icon to open</strong>
+            <span>Double-click desktop icons to launch windows</span>
         </div>
-        <button class="nav-toggle" aria-label="Menu">
-            <span></span>
-        </button>
-    </nav>
+        <div class="hint-pulse-ring"></div>
+    </div>
 
-    <main>
-        <section class="hero">
-            <div class="hero-visual">
-                <canvas id="perception-field"></canvas>
-            </div>
+    <!-- Desktop Icons -->
+    <div class="desktop-icons">
+        <div class="desktop-icon first-icon" data-window="about" ondblclick="windowManager.openWindow('about')" onclick="windowManager.openWindow('about')">
+            <div class="icon-visual icon-about">👤</div>
+            <span>About</span>
+            <div class="icon-pulse"></div>
+        </div>
+        <div class="desktop-icon" data-window="research" ondblclick="windowManager.openWindow('research')" onclick="windowManager.openWindow('research')">
+            <div class="icon-visual icon-research">🔬</div>
+            <span>Research</span>
+        </div>
+        <div class="desktop-icon" data-window="publications" ondblclick="windowManager.openWindow('publications')" onclick="windowManager.openWindow('publications')">
+            <div class="icon-visual icon-pub">📄</div>
+            <span>Publications</span>
+        </div>
+        <div class="desktop-icon" data-window="journey" ondblclick="windowManager.openWindow('journey')" onclick="windowManager.openWindow('journey')">
+            <div class="icon-visual icon-journey">🛤️</div>
+            <span>Journey</span>
+        </div>
+        <div class="desktop-icon" data-window="contact" ondblclick="windowManager.openWindow('contact')" onclick="windowManager.openWindow('contact')">
+            <div class="icon-visual icon-contact">📬</div>
+            <span>Contact</span>
+        </div>
+    </div>
 
-            <div class="hero-content">
-                <div class="hero-tag">Visual Cognition Researcher</div>
-                <h1 class="hero-title">
-                    <span class="line">Daniel</span>
-                    <span class="line accent">Lougen</span>
-                </h1>
-                <p class="hero-sub">
-                    Investigating how the brain processes visual information
-                    before conscious awareness at the <strong>University of Toronto</strong>
-                </p>
-                <div class="hero-actions">
-                    <a href="#research" class="btn btn-primary">View Research</a>
-                    <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    <!-- Floating Physics Cards (decorative) -->
+    <div class="floating-cards" id="floating-cards"></div>
+
+    <!-- Windows Container -->
+    <div class="windows-container" id="windows-container">
+
+        <!-- About Window -->
+        <div class="window" id="window-about" data-window-id="about">
+            <div class="window-header" onmousedown="windowManager.startDrag(event, 'about')">
+                <div class="window-title">
+                    <span class="window-icon">👤</span>
+                    <span>About</span>
+                </div>
+                <div class="window-controls">
+                    <button class="win-btn win-btn-minimize" onclick="windowManager.minimizeWindow('about')" title="Minimize">─</button>
+                    <button class="win-btn win-btn-maximize" onclick="windowManager.maximizeWindow('about')" title="Maximize">□</button>
+                    <button class="win-btn win-btn-close" onclick="windowManager.closeWindow('about')" title="Close">×</button>
                 </div>
             </div>
-
-            <div class="hero-scroll">
-                <span>Scroll</span>
-                <div class="scroll-indicator"></div>
-            </div>
-        </section>
-
-        <section class="about" id="about">
-            <div class="container">
-                <div class="section-label">01 / About</div>
-                <div class="about-layout">
-                    <div class="about-main">
-                        <h2 class="section-title">
-                            Exploring the <em>earliest stages</em> of visual processing
-                        </h2>
-                        <div class="about-text">
-                            <p>
-                                I'm a PhD student in the <strong>Visual Cognition Lab</strong> at the
-                                University of Toronto, supervised by Dr. Jay Pratt. My research focuses
-                                on the lateral geniculate nucleus, retinotectal pathway, and how visual
-                                information is processed before reaching conscious awareness.
-                            </p>
-                            <p>
-                                As a secondary line of research, I develop bio-constrained vision models
-                                using PyTorch—bridging computational approaches with biological vision systems.
-                            </p>
-                        </div>
-                    </div>
-                    <div class="about-side">
-                        <div class="about-image">
-                            <img src="IMG_6325.jpg" alt="Daniel Lougen">
-                        </div>
-                        <div class="about-links">
-                            <a href="https://orcid.org/0009-0001-5540-9685" target="_blank">ORCID</a>
-                            <a href="https://scholar.google.com/citations?user=r8Vs4lwAAAAJ" target="_blank">Google Scholar</a>
-                            <a href="https://github.com/DJLougen/MPKnet" target="_blank">MPKnet</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <span class="skill-num">01</span>
-                        <h3>Neuroscience</h3>
-                        <p>Visual perception, attention, early visual pathways</p>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-num">02</span>
-                        <h3>Computational</h3>
-                        <p>Python, PyTorch, R, bio-constrained modeling</p>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-num">03</span>
-                        <h3>Methods</h3>
-                        <p>Eye-tracking, VR/AR, PsychoPy, psychophysics</p>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-num">04</span>
-                        <h3>Engineering</h3>
-                        <p>Arduino, ESP32, CAD, 3D printing</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="research" id="research">
-            <div class="container">
-                <div class="section-label">02 / Research</div>
-                <h2 class="section-title">Current Focus</h2>
-
-                <div class="research-list">
-                    <article class="research-item">
-                        <div class="research-num">01</div>
-                        <div class="research-content">
-                            <h3>Inhibition of Return</h3>
-                            <p>
-                                Exploring temporal dynamics of IOR using spatial frequency manipulations
-                                to probe magnocellular and parvocellular pathway contributions.
-                            </p>
-                            <div class="research-tags">
-                                <span>Attention</span>
-                                <span>Spatial Frequency</span>
-                                <span>M/P Pathways</span>
+            <div class="window-body">
+                <div class="window-content-inner">
+                    <div class="about-layout">
+                        <div class="about-main">
+                            <h2 class="section-title">
+                                Exploring the <em>earliest stages</em> of visual processing
+                            </h2>
+                            <div class="about-text">
+                                <p>
+                                    I'm a PhD student in the <strong>Visual Cognition Lab</strong> at the
+                                    University of Toronto, supervised by Dr. Jay Pratt. My research focuses
+                                    on the lateral geniculate nucleus, retinotectal pathway, and how visual
+                                    information is processed before reaching conscious awareness.
+                                </p>
+                                <p>
+                                    As a secondary line of research, I develop bio-constrained vision models
+                                    using PyTorch—bridging computational approaches with biological vision systems.
+                                </p>
                             </div>
                         </div>
-                    </article>
-
-                    <article class="research-item">
-                        <div class="research-num">02</div>
-                        <div class="research-content">
-                            <h3>Early Visual Pathways</h3>
-                            <p>
-                                Investigating sensory processing in the lateral geniculate nucleus,
-                                superior colliculus, and pulvinar—understanding how visual information
-                                is processed before cortical involvement.
-                            </p>
-                            <div class="research-tags">
-                                <span>LGN</span>
-                                <span>Superior Colliculus</span>
-                                <span>Pulvinar</span>
+                        <div class="about-side">
+                            <div class="about-image">
+                                <img src="IMG_6325.jpg" alt="Daniel Lougen">
                             </div>
-                        </div>
-                    </article>
-
-                    <article class="research-item">
-                        <div class="research-num">03</div>
-                        <div class="research-content">
-                            <h3>Bio-Constrained Vision Models</h3>
-                            <p>
-                                Building edge-efficient PyTorch models incorporating biological
-                                constraints like receptive field organization and M/P pathway distinctions.
-                            </p>
-                            <div class="research-tags">
-                                <span>PyTorch</span>
-                                <span>Computer Vision</span>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <section class="timeline" id="journey">
-            <div class="container">
-                <div class="section-label">03 / Journey</div>
-                <h2 class="section-title">Education</h2>
-
-                <div class="timeline-layout">
-                    <div class="timeline-items">
-                        <div class="timeline-item active" data-school="toronto">
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-content">
-                                <span class="timeline-date">2024 — Present</span>
-                                <h3>PhD in Psychology</h3>
-                                <p>University of Toronto • Visual Cognition Lab</p>
-                                <p class="timeline-detail">Supervisor: Dr. Jay Pratt</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item" data-school="oregon">
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-content">
-                                <span class="timeline-date">2021 — 2023</span>
-                                <h3>MSc in Psychology</h3>
-                                <p>University of Oregon • Action & Perception Lab</p>
-                                <p class="timeline-detail">Supervisor: Dr. Paul Dassonville</p>
-                            </div>
-                        </div>
-                        <div class="timeline-item" data-school="landmark">
-                            <div class="timeline-marker"></div>
-                            <div class="timeline-content">
-                                <span class="timeline-date">2018 — 2019</span>
-                                <h3>BA in Psychology</h3>
-                                <p>Landmark College • Summa Cum Laude</p>
-                                <p class="timeline-detail">Founding member, Cognitive Neuroscience Lab</p>
+                            <div class="about-links">
+                                <a href="https://orcid.org/0009-0001-5540-9685" target="_blank">ORCID</a>
+                                <a href="https://scholar.google.com/citations?user=r8Vs4lwAAAAJ" target="_blank">Google Scholar</a>
+                                <a href="https://github.com/DJLougen/MPKnet" target="_blank">MPKnet</a>
                             </div>
                         </div>
                     </div>
-                    <div class="timeline-visual">
-                        <div class="school-logo" data-active="toronto">
-                            <img src="UofT_Logo.svg_-e1418677958967.png" alt="University of Toronto" class="logo-toronto active">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/University_of_Oregon_logo.svg" alt="University of Oregon" class="logo-oregon">
-                            <img src="https://d36hg9qb9mfx26.cloudfront.net/logos/logo-vertical.png" alt="Landmark College" class="logo-landmark">
+
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <span class="skill-num">01</span>
+                            <h3>Neuroscience</h3>
+                            <p>Visual perception, attention, early visual pathways</p>
                         </div>
-                        <div class="school-name">University of Toronto</div>
+                        <div class="skill-item">
+                            <span class="skill-num">02</span>
+                            <h3>Computational</h3>
+                            <p>Python, PyTorch, R, bio-constrained modeling</p>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-num">03</span>
+                            <h3>Methods</h3>
+                            <p>Eye-tracking, VR/AR, PsychoPy, psychophysics</p>
+                        </div>
+                        <div class="skill-item">
+                            <span class="skill-num">04</span>
+                            <h3>Engineering</h3>
+                            <p>Arduino, ESP32, CAD, 3D printing</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
+            <div class="window-resize-handle" onmousedown="windowManager.startResize(event, 'about')"></div>
+        </div>
 
-        <section class="work" id="work">
-            <div class="container">
-                <div class="section-label">04 / Publications</div>
-                <h2 class="section-title">Selected Work</h2>
-
-                <div class="pub-list">
-                    <article class="pub-item">
-                        <span class="pub-year">2024</span>
-                        <div class="pub-content">
-                            <h3>Does Inhibition of Return Care About Spatial Frequency?</h3>
-                            <p class="pub-venue">Vision Sciences Society (VSS) 2024</p>
-                            <a href="https://www.researchgate.net/publication/393728840" target="_blank" class="pub-link">
-                                View Publication →
-                            </a>
-                        </div>
-                    </article>
-
-                    <article class="pub-item">
-                        <span class="pub-year">2023</span>
-                        <div class="pub-content">
-                            <h3>Dissecting the Reaction Times of Global and Local Processing</h3>
-                            <p class="pub-venue">Vision Sciences Society (VSS) 2023</p>
-                            <a href="https://www.researchgate.net/publication/381514467" target="_blank" class="pub-link">
-                                View Publication →
-                            </a>
-                        </div>
-                    </article>
-
-                    <article class="pub-item">
-                        <span class="pub-year">2021</span>
-                        <div class="pub-content">
-                            <h3>Inclusive VR through Co-Design with Neurodiverse Learners</h3>
-                            <p class="pub-venue">iLRN Conference 2021</p>
-                        </div>
-                    </article>
+        <!-- Research Window -->
+        <div class="window" id="window-research" data-window-id="research">
+            <div class="window-header" onmousedown="windowManager.startDrag(event, 'research')">
+                <div class="window-title">
+                    <span class="window-icon">🔬</span>
+                    <span>Research</span>
+                </div>
+                <div class="window-controls">
+                    <button class="win-btn win-btn-minimize" onclick="windowManager.minimizeWindow('research')" title="Minimize">─</button>
+                    <button class="win-btn win-btn-maximize" onclick="windowManager.maximizeWindow('research')" title="Maximize">□</button>
+                    <button class="win-btn win-btn-close" onclick="windowManager.closeWindow('research')" title="Close">×</button>
                 </div>
             </div>
-        </section>
+            <div class="window-body">
+                <div class="window-content-inner">
+                    <h2 class="section-title">Current Focus</h2>
+                    <div class="research-list">
+                        <article class="research-item">
+                            <div class="research-num">01</div>
+                            <div class="research-content">
+                                <h3>Inhibition of Return</h3>
+                                <p>
+                                    Exploring temporal dynamics of IOR using spatial frequency manipulations
+                                    to probe magnocellular and parvocellular pathway contributions.
+                                </p>
+                                <div class="research-tags">
+                                    <span>Attention</span>
+                                    <span>Spatial Frequency</span>
+                                    <span>M/P Pathways</span>
+                                </div>
+                            </div>
+                        </article>
 
-        <section class="contact" id="contact">
-            <div class="container">
-                <div class="contact-layout">
-                    <div class="contact-text">
-                        <div class="section-label">05 / Contact</div>
-                        <h2 class="section-title">Let's connect</h2>
+                        <article class="research-item">
+                            <div class="research-num">02</div>
+                            <div class="research-content">
+                                <h3>Early Visual Pathways</h3>
+                                <p>
+                                    Investigating sensory processing in the lateral geniculate nucleus,
+                                    superior colliculus, and pulvinar—understanding how visual information
+                                    is processed before cortical involvement.
+                                </p>
+                                <div class="research-tags">
+                                    <span>LGN</span>
+                                    <span>Superior Colliculus</span>
+                                    <span>Pulvinar</span>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="research-item">
+                            <div class="research-num">03</div>
+                            <div class="research-content">
+                                <h3>Bio-Constrained Vision Models</h3>
+                                <p>
+                                    Building edge-efficient PyTorch models incorporating biological
+                                    constraints like receptive field organization and M/P pathway distinctions.
+                                </p>
+                                <div class="research-tags">
+                                    <span>PyTorch</span>
+                                    <span>Computer Vision</span>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <div class="window-resize-handle" onmousedown="windowManager.startResize(event, 'research')"></div>
+        </div>
+
+        <!-- Publications Window -->
+        <div class="window" id="window-publications" data-window-id="publications">
+            <div class="window-header" onmousedown="windowManager.startDrag(event, 'publications')">
+                <div class="window-title">
+                    <span class="window-icon">📄</span>
+                    <span>Publications</span>
+                </div>
+                <div class="window-controls">
+                    <button class="win-btn win-btn-minimize" onclick="windowManager.minimizeWindow('publications')" title="Minimize">─</button>
+                    <button class="win-btn win-btn-maximize" onclick="windowManager.maximizeWindow('publications')" title="Maximize">□</button>
+                    <button class="win-btn win-btn-close" onclick="windowManager.closeWindow('publications')" title="Close">×</button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="window-content-inner">
+                    <h2 class="section-title">Selected Work</h2>
+                    <div class="pub-list">
+                        <article class="pub-item">
+                            <span class="pub-year">2024</span>
+                            <div class="pub-content">
+                                <h3>Does Inhibition of Return Care About Spatial Frequency?</h3>
+                                <p class="pub-venue">Vision Sciences Society (VSS) 2024</p>
+                                <a href="https://www.researchgate.net/publication/393728840" target="_blank" class="pub-link">
+                                    View Publication →
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="pub-item">
+                            <span class="pub-year">2023</span>
+                            <div class="pub-content">
+                                <h3>Dissecting the Reaction Times of Global and Local Processing</h3>
+                                <p class="pub-venue">Vision Sciences Society (VSS) 2023</p>
+                                <a href="https://www.researchgate.net/publication/381514467" target="_blank" class="pub-link">
+                                    View Publication →
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="pub-item">
+                            <span class="pub-year">2021</span>
+                            <div class="pub-content">
+                                <h3>Inclusive VR through Co-Design with Neurodiverse Learners</h3>
+                                <p class="pub-venue">iLRN Conference 2021</p>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+            <div class="window-resize-handle" onmousedown="windowManager.startResize(event, 'publications')"></div>
+        </div>
+
+        <!-- Journey Window -->
+        <div class="window" id="window-journey" data-window-id="journey">
+            <div class="window-header" onmousedown="windowManager.startDrag(event, 'journey')">
+                <div class="window-title">
+                    <span class="window-icon">🛤️</span>
+                    <span>Journey</span>
+                </div>
+                <div class="window-controls">
+                    <button class="win-btn win-btn-minimize" onclick="windowManager.minimizeWindow('journey')" title="Minimize">─</button>
+                    <button class="win-btn win-btn-maximize" onclick="windowManager.maximizeWindow('journey')" title="Maximize">□</button>
+                    <button class="win-btn win-btn-close" onclick="windowManager.closeWindow('journey')" title="Close">×</button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="window-content-inner">
+                    <h2 class="section-title">Education</h2>
+                    <div class="timeline-layout-desktop">
+                        <div class="timeline-items">
+                            <div class="timeline-item active" data-school="toronto">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <span class="timeline-date">2024 — Present</span>
+                                    <h3>PhD in Psychology</h3>
+                                    <p>University of Toronto • Visual Cognition Lab</p>
+                                    <p class="timeline-detail">Supervisor: Dr. Jay Pratt</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item" data-school="oregon">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <span class="timeline-date">2021 — 2023</span>
+                                    <h3>MSc in Psychology</h3>
+                                    <p>University of Oregon • Action & Perception Lab</p>
+                                    <p class="timeline-detail">Supervisor: Dr. Paul Dassonville</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item" data-school="landmark">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <span class="timeline-date">2018 — 2019</span>
+                                    <h3>BA in Psychology</h3>
+                                    <p>Landmark College • Summa Cum Laude</p>
+                                    <p class="timeline-detail">Founding member, Cognitive Neuroscience Lab</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="window-resize-handle" onmousedown="windowManager.startResize(event, 'journey')"></div>
+        </div>
+
+        <!-- Contact Window -->
+        <div class="window" id="window-contact" data-window-id="contact">
+            <div class="window-header" onmousedown="windowManager.startDrag(event, 'contact')">
+                <div class="window-title">
+                    <span class="window-icon">📬</span>
+                    <span>Contact</span>
+                </div>
+                <div class="window-controls">
+                    <button class="win-btn win-btn-minimize" onclick="windowManager.minimizeWindow('contact')" title="Minimize">─</button>
+                    <button class="win-btn win-btn-maximize" onclick="windowManager.maximizeWindow('contact')" title="Maximize">□</button>
+                    <button class="win-btn win-btn-close" onclick="windowManager.closeWindow('contact')" title="Close">×</button>
+                </div>
+            </div>
+            <div class="window-body">
+                <div class="window-content-inner">
+                    <h2 class="section-title">Let's connect</h2>
+                    <div class="contact-content">
                         <p>
                             Interested in visual cognition, potential collaborations,
                             or just want to chat about the brain?
@@ -270,24 +328,32 @@
                         <a href="mailto:d.lougen@mail.utoronto.ca" class="contact-email">
                             d.lougen@mail.utoronto.ca
                         </a>
-                    </div>
-                    <div class="contact-links">
-                        <a href="https://www.linkedin.com/in/djlougen/" target="_blank">LinkedIn</a>
-                        <a href="https://github.com/DJLougen" target="_blank">GitHub</a>
-                        <a href="https://huggingface.co/DJLougen" target="_blank">Hugging Face</a>
-                        <a href="https://pratt.psych.utoronto.ca/visual-cognition-lab/" target="_blank">Lab Website</a>
+                        <div class="contact-links">
+                            <a href="https://www.linkedin.com/in/djlougen/" target="_blank">LinkedIn</a>
+                            <a href="https://github.com/DJLougen" target="_blank">GitHub</a>
+                            <a href="https://huggingface.co/DJLougen" target="_blank">Hugging Face</a>
+                            <a href="https://pratt.psych.utoronto.ca/visual-cognition-lab/" target="_blank">Lab Website</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
-
-    <footer class="footer">
-        <div class="container">
-            <p>© 2024 Daniel Lougen</p>
-            <p class="footer-note">Studying how you see this.</p>
+            <div class="window-resize-handle" onmousedown="windowManager.startResize(event, 'contact')"></div>
         </div>
-    </footer>
+
+    </div>
+
+    <!-- Taskbar -->
+    <div class="taskbar">
+        <div class="taskbar-left">
+            <div class="taskbar-logo">DL<span class="blink">_</span></div>
+        </div>
+        <div class="taskbar-windows" id="taskbar-windows">
+            <!-- Dynamic: open windows appear here -->
+        </div>
+        <div class="taskbar-right">
+            <div class="taskbar-clock" id="taskbar-clock">--:--</div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
