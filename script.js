@@ -28,7 +28,7 @@ class ParticleConstellation {
         this.ctx = canvas.getContext('2d');
         this.particles = [];
         this.numParticles = 90;
-        this.connectionDist = 160;
+        this.connectionDist = 110;
         this.mouseRadius = 200;
         this.resize();
         this.init();
@@ -90,19 +90,32 @@ class ParticleConstellation {
             p.trail.push({ x: p.x, y: p.y });
             if (p.trail.length > p.maxTrail) p.trail.shift();
 
+            // Inter-particle repulsion — prevents clumping
+            this.particles.forEach(p2 => {
+                if (p2 === p) return;
+                const dx = p.x - p2.x;
+                const dy = p.y - p2.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 40 && dist > 0) {
+                    const repel = (40 - dist) / 40 * 0.02;
+                    p.vx += (dx / dist) * repel;
+                    p.vy += (dy / dist) * repel;
+                }
+            });
+
             // Mouse attraction
             const mdx = mox - p.x;
             const mdy = moy - p.y;
             const md = Math.sqrt(mdx * mdx + mdy * mdy);
             if (md < this.mouseRadius) {
-                const force = (1 - md / this.mouseRadius) * 0.04;
+                const force = (1 - md / this.mouseRadius) * 0.05;
                 p.vx += (mdx / md) * force;
                 p.vy += (mdy / md) * force;
             }
 
             // Gentle random drift
-            p.vx += (Math.random() - 0.5) * 0.03;
-            p.vy += (Math.random() - 0.5) * 0.03;
+            p.vx += (Math.random() - 0.5) * 0.05;
+            p.vy += (Math.random() - 0.5) * 0.05;
 
             // Apply velocity
             p.x += p.vx;
@@ -403,7 +416,7 @@ class WindowManager {
             about:        { label: 'About', svg: '<svg width="12" height="12" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="5" stroke="#d4a853" stroke-width="2"/><path d="M5 24c0-4.97 4.03-9 9-9s9 4.03 9 9" stroke="#d4a853" stroke-width="2" stroke-linecap="round"/></svg>' },
             research:     { label: 'Research', svg: '<svg width="12" height="12" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="#d4a853" stroke-width="2"/><circle cx="14" cy="14" r="5" stroke="#d4a853" stroke-width="2"/><circle cx="14" cy="14" r="2" fill="#d4a853"/></svg>' },
             publications:  { label: 'Publications', svg: '<svg width="12" height="12" viewBox="0 0 28 28" fill="none"><rect x="5" y="3" width="18" height="22" rx="2" stroke="#d4a853" stroke-width="2"/><line x1="9" y1="9" x2="19" y2="9" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="13" x2="19" y2="13" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="17" x2="15" y2="17" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round"/></svg>' },
-            journey:      { label: 'Journey', svg: '<svg width="12" height="12" viewBox="0 0 28 28" fill="none"><circle cx="6" cy="7" r="2.5" stroke="#d4a853" stroke-width="2"/><circle cx="14" cy="14" r="2.5" stroke="#d4a853" stroke-width="2"/><circle cx="22" cy="21" r="2.5" stroke="#d4a853" stroke-width="2"/><path d="M8 7h4.5M16.5 14H22" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 2"/></svg>' },
+            journey:      { label: 'Journey', svg: '<svg width="12" height="12" viewBox="0 0 28 28" fill="none"><circle cx="6" cy="8" r="3" stroke="#d4a853" stroke-width="2"/><circle cx="14" cy="14" r="3" stroke="#d4a853" stroke-width="2"/><circle cx="22" cy="20" r="3" stroke="#d4a853" stroke-width="2"/><path d="M8.5 9.5l4 3.5 5.5 4.5" stroke="#d4a853" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' },
             contact:      { label: 'Contact', svg: '<svg width="12" height="12" viewBox="0 0 28 28" fill="none"><rect x="3" y="7" width="22" height="14" rx="2" stroke="#d4a853" stroke-width="2"/><path d="M3 9l11 8 11-8" stroke="#d4a853" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' }
         };
 
