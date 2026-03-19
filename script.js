@@ -644,6 +644,25 @@ class PhysicsCards {
                 card.vy = -Math.abs(card.vy) * 0.7;
             }
 
+            // Card-to-card repulsion — never overlap
+            this.cards.forEach(other => {
+                if (other === card) return;
+                const dx = card.x - other.x;
+                const dy = card.y - other.y;
+                const overlapX = (card.w + other.w) / 2 - Math.abs(dx);
+                const overlapY = (card.h + other.h) / 2 - Math.abs(dy);
+                if (overlapX > 0 && overlapY > 0) {
+                    const pushX = overlapX * 0.5 + 0.5;
+                    const pushY = overlapY * 0.5 + 0.5;
+                    if (overlapX < overlapY) {
+                        card.vx += (dx > 0 ? pushX : -pushX) * 0.4;
+                        card.rotation += (Math.random() - 0.5) * 0.3;
+                    } else {
+                        card.vy += (dy > 0 ? pushY : -pushY) * 0.4;
+                    }
+                }
+            });
+
             card.el.style.left = card.x + 'px';
             card.el.style.top = card.y + 'px';
             card.el.style.transform = `rotate(${card.rotation}deg)`;
