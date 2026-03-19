@@ -84,12 +84,12 @@ body:hover .cursor-glow {
 /* ===== Click Hint ===== */
 .click-hint {
     position: fixed;
-    left: 140px;
-    top: 50%;
-    transform: translateY(-50%);
+    left: 58px;
+    top: 70px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0;
+    gap: 6px;
     z-index: 15;
     opacity: 0;
     pointer-events: none;
@@ -101,42 +101,42 @@ body:hover .cursor-glow {
 }
 
 .hint-arrow {
-    font-size: 2.2rem;
+    font-size: 1.4rem;
     color: var(--accent);
-    animation: hintPoint 1.2s ease-in-out infinite;
-    text-shadow: 0 0 20px rgba(212, 168, 83, 0.8);
+    text-shadow: 0 0 16px rgba(212, 168, 83, 0.8);
     line-height: 1;
-    /* Point directly at the first icon */
-    margin-right: -6px;
+    animation: hintBounceDown 1.2s ease-in-out infinite;
 }
 
 .hint-text {
     display: flex;
     flex-direction: column;
-    gap: 1px;
+    align-items: center;
+    gap: 2px;
     background: rgba(15, 15, 17, 0.9);
     border: 1px solid var(--accent);
     border-radius: 8px;
-    padding: 10px 14px;
+    padding: 8px 12px;
     backdrop-filter: blur(10px);
     box-shadow: 0 0 16px rgba(212, 168, 83, 0.15), 0 4px 20px rgba(0,0,0,0.4);
+    white-space: nowrap;
 }
 
 .hint-text strong {
-    font-size: 0.78rem;
+    font-size: 0.72rem;
     color: var(--text);
     font-family: var(--font-mono);
 }
 
 .hint-text span {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     color: var(--accent);
     font-family: var(--font-mono);
 }
 
-@keyframes hintPoint {
-    0%, 100% { transform: translateX(0); opacity: 1; }
-    50% { transform: translateX(-10px); opacity: 0.6; }
+@keyframes hintBounceDown {
+    0%, 100% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(6px); opacity: 0.6; }
 }
 
 /* ===== Desktop Icons ===== */
