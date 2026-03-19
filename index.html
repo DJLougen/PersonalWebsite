@@ -29,29 +29,65 @@
     <!-- Desktop Icons -->
     <div class="desktop-icons">
         <div class="desktop-icon first-icon" data-window="about" ondblclick="windowManager.openWindow('about')" onclick="windowManager.openWindow('about')">
-            <div class="icon-visual icon-about">👤</div>
+            <div class="icon-visual">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="14" cy="10" r="5" stroke="#d4a853" stroke-width="1.5"/>
+                    <path d="M5 24c0-4.97 4.03-9 9-9s9 4.03 9 9" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </div>
             <span>About</span>
             <div class="icon-pulse"></div>
         </div>
         <div class="desktop-icon" data-window="research" ondblclick="windowManager.openWindow('research')" onclick="windowManager.openWindow('research')">
-            <div class="icon-visual icon-research">🔬</div>
+            <div class="icon-visual">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="14" cy="14" r="10" stroke="#d4a853" stroke-width="1.5"/>
+                    <circle cx="14" cy="14" r="5" stroke="#d4a853" stroke-width="1.5"/>
+                    <circle cx="14" cy="14" r="2" fill="#d4a853"/>
+                    <line x1="14" y1="4" x2="14" y2="1" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="14" y1="27" x2="14" y2="24" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="4" y1="14" x2="1" y2="14" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="27" y1="14" x2="24" y2="14" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </div>
             <span>Research</span>
         </div>
         <div class="desktop-icon" data-window="publications" ondblclick="windowManager.openWindow('publications')" onclick="windowManager.openWindow('publications')">
-            <div class="icon-visual icon-pub">📄</div>
+            <div class="icon-visual">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="5" y="3" width="18" height="22" rx="2" stroke="#d4a853" stroke-width="1.5"/>
+                    <line x1="9" y1="9" x2="19" y2="9" stroke="#d4a853" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="9" y1="13" x2="19" y2="13" stroke="#d4a853" stroke-width="1.2" stroke-linecap="round"/>
+                    <line x1="9" y1="17" x2="15" y2="17" stroke="#d4a853" stroke-width="1.2" stroke-linecap="round"/>
+                    <path d="M19 15l4 4-4 4" stroke="#d4a853" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
             <span>Publications</span>
         </div>
         <div class="desktop-icon" data-window="journey" ondblclick="windowManager.openWindow('journey')" onclick="windowManager.openWindow('journey')">
-            <div class="icon-visual icon-journey">🛤️</div>
+            <div class="icon-visual">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="6" cy="7" r="2.5" stroke="#d4a853" stroke-width="1.3"/>
+                    <circle cx="14" cy="14" r="2.5" stroke="#d4a853" stroke-width="1.3"/>
+                    <circle cx="22" cy="21" r="2.5" stroke="#d4a853" stroke-width="1.3"/>
+                    <path d="M8 7h4.5M16.5 14H22" stroke="#d4a853" stroke-width="1.3" stroke-linecap="round" stroke-dasharray="2 2"/>
+                    <path d="M10 7c2 3 4 6 4 7" stroke="#d4a853" stroke-width="1.3" stroke-linecap="round"/>
+                </svg>
+            </div>
             <span>Journey</span>
         </div>
         <div class="desktop-icon" data-window="contact" ondblclick="windowManager.openWindow('contact')" onclick="windowManager.openWindow('contact')">
-            <div class="icon-visual icon-contact">📬</div>
+            <div class="icon-visual">
+                <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="3" y="7" width="22" height="14" rx="2" stroke="#d4a853" stroke-width="1.5"/>
+                    <path d="M3 9l11 8 11-8" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
             <span>Contact</span>
         </div>
     </div>
 
-    <!-- Floating Physics Cards (decorative) -->
+    <!-- Floating Physics Cards -->
     <div class="floating-cards" id="floating-cards"></div>
 
     <!-- Windows Container -->
@@ -61,7 +97,9 @@
         <div class="window" id="window-about" data-window-id="about">
             <div class="window-header" onmousedown="windowManager.startDrag(event, 'about')">
                 <div class="window-title">
-                    <span class="window-icon">👤</span>
+                    <span class="window-icon">
+                        <svg width="14" height="14" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="5" stroke="#d4a853" stroke-width="2"/><path d="M5 24c0-4.97 4.03-9 9-9s9 4.03 9 9" stroke="#d4a853" stroke-width="2" stroke-linecap="round"/></svg>
+                    </span>
                     <span>About</span>
                 </div>
                 <div class="window-controls">
@@ -133,7 +171,9 @@
         <div class="window" id="window-research" data-window-id="research">
             <div class="window-header" onmousedown="windowManager.startDrag(event, 'research')">
                 <div class="window-title">
-                    <span class="window-icon">🔬</span>
+                    <span class="window-icon">
+                        <svg width="14" height="14" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="#d4a853" stroke-width="2"/><circle cx="14" cy="14" r="5" stroke="#d4a853" stroke-width="2"/><circle cx="14" cy="14" r="2" fill="#d4a853"/></svg>
+                    </span>
                     <span>Research</span>
                 </div>
                 <div class="window-controls">
@@ -203,7 +243,9 @@
         <div class="window" id="window-publications" data-window-id="publications">
             <div class="window-header" onmousedown="windowManager.startDrag(event, 'publications')">
                 <div class="window-title">
-                    <span class="window-icon">📄</span>
+                    <span class="window-icon">
+                        <svg width="14" height="14" viewBox="0 0 28 28" fill="none"><rect x="5" y="3" width="18" height="22" rx="2" stroke="#d4a853" stroke-width="2"/><line x1="9" y1="9" x2="19" y2="9" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="13" x2="19" y2="13" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="17" x2="15" y2="17" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </span>
                     <span>Publications</span>
                 </div>
                 <div class="window-controls">
@@ -255,7 +297,9 @@
         <div class="window" id="window-journey" data-window-id="journey">
             <div class="window-header" onmousedown="windowManager.startDrag(event, 'journey')">
                 <div class="window-title">
-                    <span class="window-icon">🛤️</span>
+                    <span class="window-icon">
+                        <svg width="14" height="14" viewBox="0 0 28 28" fill="none"><circle cx="6" cy="7" r="2.5" stroke="#d4a853" stroke-width="2"/><circle cx="14" cy="14" r="2.5" stroke="#d4a853" stroke-width="2"/><circle cx="22" cy="21" r="2.5" stroke="#d4a853" stroke-width="2"/><path d="M8 7h4.5M16.5 14H22" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 2"/></svg>
+                    </span>
                     <span>Journey</span>
                 </div>
                 <div class="window-controls">
@@ -307,7 +351,9 @@
         <div class="window" id="window-contact" data-window-id="contact">
             <div class="window-header" onmousedown="windowManager.startDrag(event, 'contact')">
                 <div class="window-title">
-                    <span class="window-icon">📬</span>
+                    <span class="window-icon">
+                        <svg width="14" height="14" viewBox="0 0 28 28" fill="none"><rect x="3" y="7" width="22" height="14" rx="2" stroke="#d4a853" stroke-width="2"/><path d="M3 9l11 8 11-8" stroke="#d4a853" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </span>
                     <span>Contact</span>
                 </div>
                 <div class="window-controls">

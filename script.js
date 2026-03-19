@@ -400,11 +400,11 @@ class WindowManager {
         container.innerHTML = '';
 
         const windowMeta = {
-            about:        { icon: '👤', label: 'About' },
-            research:     { icon: '🔬', label: 'Research' },
-            publications:  { icon: '📄', label: 'Publications' },
-            journey:      { icon: '🛤️', label: 'Journey' },
-            contact:      { icon: '📬', label: 'Contact' }
+            about:        { label: 'About', svg: '<svg width="12" height="12" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="10" r="5" stroke="#d4a853" stroke-width="2"/><path d="M5 24c0-4.97 4.03-9 9-9s9 4.03 9 9" stroke="#d4a853" stroke-width="2" stroke-linecap="round"/></svg>' },
+            research:     { label: 'Research', svg: '<svg width="12" height="12" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="10" stroke="#d4a853" stroke-width="2"/><circle cx="14" cy="14" r="5" stroke="#d4a853" stroke-width="2"/><circle cx="14" cy="14" r="2" fill="#d4a853"/></svg>' },
+            publications:  { label: 'Publications', svg: '<svg width="12" height="12" viewBox="0 0 28 28" fill="none"><rect x="5" y="3" width="18" height="22" rx="2" stroke="#d4a853" stroke-width="2"/><line x1="9" y1="9" x2="19" y2="9" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="13" x2="19" y2="13" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round"/><line x1="9" y1="17" x2="15" y2="17" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round"/></svg>' },
+            journey:      { label: 'Journey', svg: '<svg width="12" height="12" viewBox="0 0 28 28" fill="none"><circle cx="6" cy="7" r="2.5" stroke="#d4a853" stroke-width="2"/><circle cx="14" cy="14" r="2.5" stroke="#d4a853" stroke-width="2"/><circle cx="22" cy="21" r="2.5" stroke="#d4a853" stroke-width="2"/><path d="M8 7h4.5M16.5 14H22" stroke="#d4a853" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 2"/></svg>' },
+            contact:      { label: 'Contact', svg: '<svg width="12" height="12" viewBox="0 0 28 28" fill="none"><rect x="3" y="7" width="22" height="14" rx="2" stroke="#d4a853" stroke-width="2"/><path d="M3 9l11 8 11-8" stroke="#d4a853" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>' }
         };
 
         Object.keys(this.windows).forEach(id => {
@@ -412,7 +412,7 @@ class WindowManager {
             if (winData.el.classList.contains('visible') && !winData.minimized) {
                 const btn = document.createElement('button');
                 btn.className = 'taskbar-window-btn' + (this.activeWindow === id ? ' active' : '');
-                btn.innerHTML = `<span class="btn-icon">${windowMeta[id].icon}</span>${windowMeta[id].label}`;
+                btn.innerHTML = `<span class="btn-icon">${windowMeta[id].svg}</span>${windowMeta[id].label}`;
                 btn.onclick = () => this.bringToFront(id);
                 container.appendChild(btn);
             }
@@ -509,30 +509,36 @@ class PhysicsCards {
     constructor() {
         this.container = document.getElementById('floating-cards');
         this.cards = [];
-        this.cardDefs = [
-            { icon: '📰', title: 'IOR Paper' },
-            { icon: '🧠', title: 'LGN Study' },
-            { icon: '⚡', title: 'Bio Model' },
-            { icon: '👁️', title: 'Eye Track' },
-            { icon: '🔍', title: 'VSS 2024' }
-        ];
-        this.init();
-    }
 
-    init() {
+        const cardSvgPaths = {
+            ior: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="14" r="8" stroke="#d4a853" stroke-width="1.3"/><circle cx="14" cy="14" r="3" stroke="#d4a853" stroke-width="1.3"/><path d="M14 6v-3M14 25v-3M6 14H3M25 14h-3" stroke="#d4a853" stroke-width="1.3" stroke-linecap="round"/></svg>`,
+            lgn: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><ellipse cx="14" cy="14" rx="10" ry="6" stroke="#d4a853" stroke-width="1.3" transform="rotate(-30 14 14)"/><ellipse cx="14" cy="14" rx="10" ry="6" stroke="#d4a853" stroke-width="1.3" transform="rotate(30 14 14)"/><circle cx="14" cy="14" r="2.5" fill="#d4a853"/></svg>`,
+            bio: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M14 4c-5 6-8 10-8 14a8 8 0 0016 0c0-4-3-8-8-14z" stroke="#d4a853" stroke-width="1.3"/><path d="M14 12v8M10 16h8" stroke="#d4a853" stroke-width="1.3" stroke-linecap="round"/></svg>`,
+            eye: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><path d="M3 14s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z" stroke="#d4a853" stroke-width="1.3"/><circle cx="14" cy="14" r="4" stroke="#d4a853" stroke-width="1.3"/><circle cx="14" cy="14" r="1.5" fill="#d4a853"/></svg>`,
+            vss: `<svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect x="5" y="5" width="18" height="18" rx="2" stroke="#d4a853" stroke-width="1.3"/><path d="M5 10l9 6 9-6" stroke="#d4a853" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><line x1="14" y1="10" x2="14" y2="23" stroke="#d4a853" stroke-width="1.3"/></svg>`
+        };
+
+        const cardDefs = [
+            { id: 'ior', title: 'IOR Study', svg: cardSvgPaths.ior, window: 'research' },
+            { id: 'lgn', title: 'LGN Study', svg: cardSvgPaths.lgn, window: 'research' },
+            { id: 'bio', title: 'Bio Model', svg: cardSvgPaths.bio, window: 'research' },
+            { id: 'eye', title: 'Eye Track', svg: cardSvgPaths.eye, window: 'journey' },
+            { id: 'vss', title: 'VSS 2024', svg: cardSvgPaths.vss, window: 'publications' }
+        ];
+
         if (!this.container) return;
+
         const w = window.innerWidth;
         const h = window.innerHeight;
 
-        this.cardDefs.forEach((def, i) => {
+        cardDefs.forEach((def, i) => {
             const card = document.createElement('div');
             card.className = 'physics-card';
             card.innerHTML = `
-                <span class="card-icon">${def.icon}</span>
+                <span class="card-icon">${def.svg}</span>
                 <span class="card-title">${def.title}</span>
             `;
 
-            // Position cards in the open space to the right of icons
             const x = 280 + i * 140 + Math.random() * 40;
             const y = 120 + Math.random() * (h - 500);
 
@@ -542,7 +548,7 @@ class PhysicsCards {
 
             this.container.appendChild(card);
 
-            this.cards.push({
+            const cardData = {
                 el: card,
                 x, y,
                 vx: (Math.random() - 0.5) * 0.4,
@@ -552,26 +558,25 @@ class PhysicsCards {
                 settled: false,
                 settleTimer: 0,
                 w: 120,
-                h: 160
-            });
-        });
+                h: 160,
+                windowId: def.window
+            };
 
-        // Click card to open relevant window
-        const windowIds = ['about', 'research', 'research', 'journey', 'publications'];
-        this.cards.forEach((card, i) => {
-            card.el.addEventListener('click', () => {
-                windowManager.openWindow(windowIds[i]);
+            this.cards.push(cardData);
+
+            card.addEventListener('click', () => {
+                windowManager.openWindow(def.window);
             });
-            card.el.addEventListener('mouseenter', () => {
-                card.settled = true;
-                card.settleTimer = 0;
-                card.vx *= 0.3;
-                card.vy *= 0.3;
-                card.el.classList.add('settled');
+            card.addEventListener('mouseenter', () => {
+                cardData.settled = true;
+                cardData.settleTimer = 0;
+                cardData.vx *= 0.3;
+                cardData.vy *= 0.3;
+                card.classList.add('settled');
             });
-            card.el.addEventListener('mouseleave', () => {
-                card.settled = false;
-                card.el.classList.remove('settled');
+            card.addEventListener('mouseleave', () => {
+                cardData.settled = false;
+                card.classList.remove('settled');
             });
         });
 
@@ -582,6 +587,7 @@ class PhysicsCards {
         const h = window.innerHeight;
         const w = window.innerWidth;
         const margin = 50;
+        const taskbarH = 40;
 
         this.cards.forEach(card => {
             if (card.settled) {
@@ -597,13 +603,11 @@ class PhysicsCards {
             card.y += card.vy;
             card.rotation += card.rotVel;
 
-            // Damping
             card.vx *= 0.998;
             card.vy *= 0.998;
             card.rotVel *= 0.99;
 
-            // Bounce — keep cards in the open area (right of icons, above taskbar)
-            const leftBound = 200;  // don't go into icon area
+            const leftBound = 200;
             const rightBound = w - margin - card.w;
             const topBound = margin;
             const bottomBound = h - taskbarH - margin - card.h;
